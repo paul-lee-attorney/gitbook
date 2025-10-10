@@ -1,0 +1,32 @@
+# 📐 Templates and Version Control
+
+1. **Cloning Technology and Delegate Call Mechanism**
+
+**ComBoox** extensively adopts **cloning** technology of smart contracts, i.e. using the data structures, functions and algorithms defined in the template contract to compute the variables of cloned contracts via **delegate call mechanism**. Comparing with copy contracts, this technology can greatly reduce the bytecode size and gas fees consumption of deploying contracts.
+
+In addition, **contract templates** also adopts a lot of **delegate call mechanism**, i.e. leaving the definitions of data objects, methods and algorithms thereof in public libraries, which further reduced the size of the template contracts, as well as their deploying cost.
+
+2. **Documents Mapping of Reg Center**
+
+Another important function of **Reg Center** is to register and manage the template contracts and their clones, for which **Reg Center** adopts two mappings. Users can query a document’s type, version, author, creator and creation date by its contract address, or, query a document’s address by its sequence number.
+
+3. **Types of Template Contracts**
+
+Currently, there are totally 34 template contracts registered in **Reg Center**. When creating a new book-entry system for a company, or creating a new **Shareholders Agreement** or **Investment Agreement**, actually is deploying one or more clone contracts based on the templates.
+
+<table><thead><tr><th width="68">No.</th><th>Name</th><th width="63.272705078125">No.</th><th>Name</th><th width="73.0909423828125">No.</th><th>Name</th></tr></thead><tbody><tr><td>1</td><td>Register of Constitution Keeper</td><td>13</td><td>Meeting Minutes</td><td>25</td><td>Drag-Along &#x26; Tag-Along</td></tr><tr><td>2</td><td>Register of Directors Keeper</td><td>14</td><td>Register of Members</td><td>26</td><td>(Call / Put) Options</td></tr><tr><td>3</td><td>Board Meeting Minutes Keeper</td><td>15</td><td>Register of Agreements</td><td>27</td><td>List of Projects</td></tr><tr><td>4</td><td>Register of Members Keeper</td><td>16</td><td>Register of Options</td><td>28</td><td>Cashier</td></tr><tr><td>5</td><td>General Meeting Minutes Keeper</td><td>17</td><td>Register of Pledge</td><td>29</td><td>List of USD Orders</td></tr><tr><td>6</td><td>Register of Agreements Keeper</td><td>18</td><td>Register of Shares</td><td>30</td><td>USD Keeper</td></tr><tr><td>7</td><td>Register of Options Keeper</td><td>19</td><td>List of ETH Orders</td><td>31</td><td>UsdROM Keeper</td></tr><tr><td>8</td><td>Register of Pledge Keeper</td><td>20</td><td>General Keeper</td><td>32</td><td>UsdROA Keeper</td></tr><tr><td>9</td><td>Shareholders Agreement Keeper</td><td>21</td><td>Investment Agreement</td><td>33</td><td>UsdLOO Keeper</td></tr><tr><td>10</td><td>Lists of ETH Orders Keeper</td><td>22</td><td>Shareholders Agreement</td><td>34</td><td>UsdROO Keeper</td></tr><tr><td>11</td><td>Register of Constitution</td><td>23</td><td>Anti-dilution</td><td> </td><td> </td></tr><tr><td>12</td><td>Register of Directors</td><td>24</td><td>Lock-up</td><td> </td><td> </td></tr></tbody></table>
+
+In **ComBoox**, the design model for setting corporate governance rules is very flexible. Changing the definition of a specific “rule” and its parsing function, the attributes’ composition of the rule will be changed; changing an API’s algorithm of a **Bookkeeper**, the conditions, procedures and consequences of a legal behavior will be revised. And, all these changing methods on the corporate governing rules and terms, can be implemented by means of developing and incorporating new contract templates into the system.
+
+Any developer can develop contract templates. These templates can be incorporated into the system upon approval and will become new foundations for cloning contracts. When users call to clone contracts, **Reg Center** will deduct a certain amount of CBP from the caller's account and pay to the template author's account as license fees. The rate of such license fee, together with its promotion policies, can be set and adjusted by the template’s author at full discretion.
+
+For detailed arrangements concerning the copyright and license fee, as well as **CBP** tokens and the economic model of the system, please see the relevant sections of this paper.
+
+
+
+## Source Code
+
+### [**DocsRepo**](https://github.com/paul-lee-attorney/comboox/blob/master/contracts/lib/DocsRepo.sol)
+
+
+
