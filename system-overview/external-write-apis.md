@@ -1,8 +1,4 @@
----
-icon: up-right-from-square
----
-
-# 6. External Write APIs
+# 🧩 6. External Write APIs
 
 There are totally 【91】 external write APIs exposed by the system, which collectively encompass nearly all legal acts relating to corporate governance, share transactions, and the payment and receipt of ETH and/or USDC. These APIs are routed to various Sub-Keepers for further processing and execution, thereby effectuating the corresponding legal consequences of each act.
 
@@ -88,3 +84,30 @@ There are totally 【91】 external write APIs exposed by the system, which coll
 
 </details>
 
+<details>
+
+<summary>6.5. APIs Routed to GMM Keeper</summary>
+
+<table><thead><tr><th width="75.40625">S.N.</th><th width="308.08984375">API</th><th>Description of Functions and Input Parameters</th></tr></thead><tbody><tr><td>25</td><td><p>function nominateDirector(</p><p>  uint256 <em><mark style="color:blue;">seqOfPos</mark></em>,</p><p>  uint256 <em><mark style="color:blue;">candidate</mark></em></p><p>) external</p></td><td>(The Member who has the nomination right) Nominate the user numbered as <em><mark style="color:blue;">candidate</mark></em> for the Director’s position numbered as <em><mark style="color:blue;">seqOfPos</mark></em>.</td></tr><tr><td>26</td><td><p>function createMotionToRemoveDirector(</p><p>  uint256 <em><mark style="color:blue;">seqOfPos</mark></em></p><p>) external</p></td><td>(The Member who has the nomination right) Create a draft motion to remove the Director on the position numbered as <em><mark style="color:blue;">seqOfPos</mark></em>.</td></tr><tr><td>27</td><td><p>function proposeDocOfGM(</p><p>  uint256 <em><mark style="color:blue;">doc</mark></em>,</p><p>  uint256 <em><mark style="color:blue;">seqOfVR</mark></em>,</p><p>  uint256 <em><mark style="color:blue;">executor</mark></em></p><p>) external</p></td><td>(A Member) Create and propose a draft Motion for the General Meeting to approve the document deployed at the address of <em><mark style="color:blue;">doc</mark></em> as per the voting rule numbered as <em><mark style="color:blue;">seqOfVR</mark></em> with the user numbered as <em><mark style="color:blue;">executor</mark></em> to invoke it.</td></tr><tr><td>28</td><td><p>function createActionOfGM(</p><p>    uint <em><mark style="color:blue;">seqOfVR</mark></em>,</p><p>    address[] memory <em><mark style="color:blue;">targets</mark></em>,</p><p>    uint256[] memory <em><mark style="color:blue;">values</mark></em>,</p><p>    bytes[] memory <em><mark style="color:blue;">params</mark></em>,</p><p>    bytes32 <em><mark style="color:blue;">desHash</mark></em>,</p><p>    uint <em><mark style="color:blue;">executor</mark></em></p><p>) external</p></td><td>(A Member) Create a draft Motion for the General Meeting to execute a series of calls, as per the voting rule numbered as <em><mark style="color:blue;">seqOfVR</mark></em>, to the contracts deployed at the addresses of <em><mark style="color:blue;">targets</mark></em>, with paying the respective ETH amount to <em><mark style="color:blue;">values</mark></em>, and inputting parameters of <em><mark style="color:blue;">params</mark></em>, attached a description message whose hash value is <em><mark style="color:blue;">desHash</mark></em>, with the user numbered as <em><mark style="color:blue;">executor</mark></em> to invoke it.</td></tr><tr><td>29</td><td><p>function entrustDelegaterForGeneralMeeting(</p><p>  uint256 <em><mark style="color:blue;">seqOfMotion</mark></em>,</p><p>  uint256 <em><mark style="color:blue;">delegate</mark></em></p><p>) external</p></td><td>(A Member) Entrust the user numbered as <em><mark style="color:blue;">delegate</mark></em> to cast vote in General Meeting for the Motion numbered as <em><mark style="color:blue;">seqOfMotion</mark></em>.</td></tr><tr><td>30</td><td><p>function proposeMotionToGeneralMeeting(</p><p>  uint256 <em><mark style="color:blue;">seqOfMotion</mark></em></p><p>) external</p></td><td>(A Member) Proposes the Motion numbered as <em><mark style="color:blue;">seqOfMotion</mark></em> to the General Meeting.</td></tr><tr><td>31</td><td><p>function castVoteOfGM(</p><p>  uint256 <em><mark style="color:blue;">seqOfMotion</mark></em>,</p><p>  uint256 <em><mark style="color:blue;">attitude</mark></em>,</p><p>  bytes32 <em><mark style="color:blue;">sigHash</mark></em></p><p>) external</p></td><td>(A Member) Cast vote with the <em><mark style="color:blue;">attitude</mark></em> for the Motion numbered as <em><mark style="color:blue;">seqOfMotion</mark></em> with the signature message’s hash value as <em><mark style="color:blue;">sigHash</mark></em>.</td></tr><tr><td>32</td><td><p>function voteCountingOfGM(</p><p>  uint256 <em><mark style="color:blue;">seqOfMotion</mark></em></p><p>) external</p></td><td>(Any user) Count the vote result for the Motion on the General Meeting numbered as <em><mark style="color:blue;">seqOfMotion</mark></em>.</td></tr><tr><td>33</td><td><p>function execActionOfGM(</p><p>    uint <em><mark style="color:blue;">typeOfAction</mark></em>,</p><p>    address[] memory <em><mark style="color:blue;">targets</mark></em>,</p><p>    uint256[] memory <em><mark style="color:blue;">values</mark></em>,</p><p>    bytes[] memory <em><mark style="color:blue;">params</mark></em>,</p><p>    bytes32 <em><mark style="color:blue;">desHash</mark></em>,</p><p>    uint256 <em><mark style="color:blue;">seqOfMotion</mark></em></p><p>) external</p></td><td>(The designated executor) Execute the Motion numbered as <em><mark style="color:blue;">seqOfMotion</mark></em>, categorized as <em><mark style="color:blue;">typeOfAction</mark></em>, to trigger the series of calls to the contracts deployed at addresses of <em><mark style="color:blue;">targets</mark></em>, with paying the respective ETH amount to <em><mark style="color:blue;">values</mark></em>, inputting parameters as <em><mark style="color:blue;">params</mark></em>, attached with hash value of the description message as <em><mark style="color:blue;">desHash</mark></em>.</td></tr><tr><td>34</td><td><p>function deprecateGK(</p><p>  address payable <em><mark style="color:blue;">receiver</mark></em>,</p><p>  uint256 <em><mark style="color:blue;">seqOfMotion</mark></em></p><p>) external</p></td><td>(The designated executor) deprecate the current General Keeper, as per the Motion numbered as <em><mark style="color:blue;">seqOfMotion</mark></em>, so as to move all archives and the balance amount of ETH and CBP to the new General Keeper deployed at the address of <em><mark style="color:blue;">receiver</mark></em>.</td></tr></tbody></table>
+
+<figure><img src="../.gitbook/assets/gmmkeeper-25.jpg" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/gmmkeeper-26.jpg" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/gmmkeeper-27.jpg" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/gmmkeeper-28.jpg" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/gmmkeeper-29.jpg" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/gmmkeeper-30.jpg" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/gmmkeeper-31.jpg" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/gmmkeeper-32.jpg" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/gmmkeeper-33.jpg" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/gmmkeeper-34.jpg" alt=""><figcaption></figcaption></figure>
+
+</details>
