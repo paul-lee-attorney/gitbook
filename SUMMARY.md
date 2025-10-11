@@ -4,21 +4,21 @@
 
 ## 🏛️ System Overview
 
-* [⌨️ 1. Overview](system-overview/1.-overview/README.md)
-  * [⚠️ 1.1. “Pain Points” of Corporate Governance](system-overview/1.-overview/1.1.-pain-points-of-corporate-governance.md)
-  * [💡 1.2. Blockchain Solution](system-overview/1.-overview/1.2.-blockchain-solution.md)
-  * [💰 1.3. Tokenization and Company Evaluation](system-overview/1.-overview/1.3.-tokenization-and-company-evaluation.md)
-  * [✨ 1.4. Features and Advantages](system-overview/1.-overview/1.4.-features-and-advantages.md)
-* [🖥️ 2. Computational Control Model](system-overview/2.-computational-control-model.md)
-* [🏗️ 3. System Architecture](system-overview/3.-system-architecture.md)
-* [🚷 4. Identification and Access Control](system-overview/4.-identification-and-access-control.md)
+* [⌨️ 1. Overview](system-overview/overview/README.md)
+  * [⚠️ 1.1. “Pain Points” of Corporate Governance](system-overview/overview/pain-points-of-corporate-governance.md)
+  * [💡 1.2. Blockchain Solution](system-overview/overview/blockchain-solution.md)
+  * [💰 1.3. Tokenization and Company Evaluation](system-overview/overview/tokenization-and-company-evaluation.md)
+  * [✨ 1.4. Features and Advantages](system-overview/overview/features-and-advantages.md)
+* [🖥️ 2. Computational Control Model](system-overview/computational-control-model.md)
+* [🏗️ 3. System Architecture](system-overview/system-architecture.md)
+* [🚷 4. Identification and Access Control](system-overview/identification-and-access-control.md)
 * [📐 5. Templates and Version Control](system-overview/5.-templates-and-version-control.md)
 * [🧩 6. External Write APIs](system-overview/external-write-apis.md)
 * [⏳ 7. Scenarios for Equity Transactions and Corporate Governance](system-overview/7.-scenarios-for-equity-transactions-and-corporate-governance.md)
-* [💰 8. CBP and Economic Model](system-overview/8.-cbp-and-economic-model.md)
-* [💸 9. Financial Records](system-overview/9.-financial-records.md)
-* [☝️ 10. Key Legal Issues](system-overview/10.-key-legal-issues.md)
-* [🥇 11. Software License](system-overview/11.-software-license.md)
+* [💰 8. CBP and Economic Model](system-overview/cbp-and-economic-model.md)
+* [💸 9. Financial Records](system-overview/financial-records.md)
+* [☝️ 10. Key Legal Issues](system-overview/key-legal-issues.md)
+* [🥇 11. Software License](system-overview/software-license.md)
 
 ## 🕹️ Operation Guide
 

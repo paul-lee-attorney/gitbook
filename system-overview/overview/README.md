@@ -14,20 +14,20 @@ Based on the above concepts, we developed and deployed the **ComBoox** platform.
 
 **ComBoox** is a blockchain-based company records-keeping system to assist users to quickly establish a legal, secure, transparent, and reliable smart contracts system for automatically registering equity shares and keeping records of corporate governance.
 
-{% content-ref url="1.1.-pain-points-of-corporate-governance.md" %}
-[1.1.-pain-points-of-corporate-governance.md](1.1.-pain-points-of-corporate-governance.md)
+{% content-ref url="pain-points-of-corporate-governance.md" %}
+[pain-points-of-corporate-governance.md](pain-points-of-corporate-governance.md)
 {% endcontent-ref %}
 
-{% content-ref url="1.2.-blockchain-solution.md" %}
-[1.2.-blockchain-solution.md](1.2.-blockchain-solution.md)
+{% content-ref url="blockchain-solution.md" %}
+[blockchain-solution.md](blockchain-solution.md)
 {% endcontent-ref %}
 
-{% content-ref url="1.3.-tokenization-and-company-evaluation.md" %}
-[1.3.-tokenization-and-company-evaluation.md](1.3.-tokenization-and-company-evaluation.md)
+{% content-ref url="tokenization-and-company-evaluation.md" %}
+[tokenization-and-company-evaluation.md](tokenization-and-company-evaluation.md)
 {% endcontent-ref %}
 
-{% content-ref url="1.4.-features-and-advantages.md" %}
-[1.4.-features-and-advantages.md](1.4.-features-and-advantages.md)
+{% content-ref url="features-and-advantages.md" %}
+[features-and-advantages.md](features-and-advantages.md)
 {% endcontent-ref %}
 
 

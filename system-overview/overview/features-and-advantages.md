@@ -1,4 +1,4 @@
-# ✨ Features and Advantages
+# ✨ 1.4. Features and Advantages
 
 To accommodate different demands, **ComBoox** adheres to the concept of "**dynamic configuration and plug-and-play**" to maintain the flexibility and scalability of its smart contract system, specifically:
 

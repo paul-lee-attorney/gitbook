@@ -1,4 +1,4 @@
-# 💡 Blockchain Solution
+# 💡 1.2. Blockchain Solution
 
 The emergence of blockchain and smart contract technology presents a good opportunity to solve the above mentioned problems. If using blockchain to book equity shares, and using smart contracts to define and automatically control share transactions and corporate governance activities, then, the potential human influences can be excluded to an extreme extent, so as to realize:
 

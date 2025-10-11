@@ -1,4 +1,4 @@
-# ⚠️ “Pain Points” of Corporate Governance
+# ⚠️ 1.1. “Pain Points” of Corporate Governance
 
 The capital market has long been suffered from some "pain points" of corporate governance, which can be summarized into following three aspects:
 

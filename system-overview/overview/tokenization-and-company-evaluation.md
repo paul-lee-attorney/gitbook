@@ -1,4 +1,4 @@
-# 💰 Tokenization and Company Evaluation
+# 💰 1.3. Tokenization and Company Evaluation
 
 Equity share is a typical kind of book-entry interests, and also an important trading object of capital markets.
 
