@@ -6,7 +6,7 @@
 
 <details>
 
-<summary>3.1. <strong>Registers</strong></summary>
+<summary><strong>3.1. Registers</strong></summary>
 
 **Registers** defined registration books to record the various book-entry interests (such as equities, pledges, options) or corporate governance documents (such as general meeting minutes and board meeting minutes). The core functions of which are to define the attributes composition of various bookkeeping objects, and the data structure, parameter and logical verification algorithm thereof, as well as the basic methods and APIs for adding, deleting, modifying and querying these objects.
 
@@ -32,7 +32,7 @@ For example, when a director takes his/her seat, he/she needs to call the "Take 
 
 (4)    If the message sender's identity is verified, **ROD Keeper** will call **Register of Directors (“ROD”)** to record the user number, timestamp, as well as the block number concerned, so as to complete the entire process of inauguration.
 
-![](<../.gitbook/assets/image (2).png>)
+<figure><img src="../.gitbook/assets/whitepaper_img3.jpg" alt=""><figcaption></figcaption></figure>
 
 In the above process, GMM and **ROD** are the two types of **Registers.** **GMM** provides the motion’s type and its voting results by answering the query request of **ROD Keeper**, so as to determine whether the conditions for exercising the rights has been fulfilled, thereafter, verifies the caller's identity against the user number of the motion's candidate. Then, **ROD Keeper** writes the user number, date and block number of inauguration into **ROD**, so as to write down the action records of "inauguration".
 
@@ -57,7 +57,7 @@ Based on the types of information recorded, **Registers** can be divided into tw
 
 <details>
 
-<summary>3.2. <strong>Bookkeepers</strong></summary>
+<summary><strong>3.2. Bookkeepers</strong></summary>
 
 **Bookkeepers** defined the APIs for dozens of legal behaviors regarding corporate governance and share transactions, so as to manage and control the identification of actors, conditions, procedures and legal consequences of the relevant legal behaviors.
 
@@ -145,7 +145,7 @@ To facilitate user payments in USDC for equity consideration, margin deposits, a
 
 <details>
 
-<summary>3.3. <strong>ShareholdersAgreement</strong></summary>
+<summary><strong>3.3. ShareholdersAgreement</strong></summary>
 
 **Shareholders Agreement** is to dynamically define rules and conditions relating to share transaction and corporate governance, which can be deemed as a constitutional document of the company.
 
@@ -183,7 +183,7 @@ Therefore, **Shareholders Agreement** can be deemed as a data base comprises of 
 
 <details>
 
-<summary>3.4. <strong>InvestmentAgreement</strong></summary>
+<summary><strong>3.4. InvestmentAgreement</strong></summary>
 
 **Investment Agreement** dynamically defines all necessary elements of deals for issuing or transferring shares, such as the subject equity shares, price, amounts, buyer's identity, signing deadline, closing deadline, contractual parties and so on.
 
