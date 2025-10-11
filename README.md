@@ -17,11 +17,9 @@ description: '---- A Blockchain-Based Company Book-Entry Platform'
 >
 > (1) right holders may **directly exercise** rights;
 >
-> (2) obligors have **no chance** to default or violate;&#x20;
+> (2) obligors have **no chance** to default or violate; and
 >
-> (3) **real-time** disclosure of full information; and
->
-> (4) **tokenization** of equity shares in a **complete** sense.\
+> (3) **real-time** disclosure of full information.\
 >
 
 {% embed url="https://youtu.be/FCEKZAFHKxU" %}
