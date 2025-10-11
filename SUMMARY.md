@@ -12,7 +12,7 @@
 * [🖥️ Computational Control Model](system-overview/computational-control-model.md)
 * [🏗️ System Architecture](system-overview/system-architecture.md)
 * [🚷 Identification and Access Control](system-overview/identification-and-access-control.md)
-* [📐 Templates and Version Control](system-overview/templates-and-version-control.md)
+* [📐 5. Templates and Version Control](system-overview/5.-templates-and-version-control.md)
 * [6. External Write APIs](system-overview/external-write-apis.md)
 * [💰 CBP and Economic Model](system-overview/cbp-and-economic-model.md)
 * [💸 Financial Records](system-overview/financial-records.md)
