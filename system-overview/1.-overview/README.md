@@ -1,4 +1,4 @@
-# ⌨️ Overview
+# ⌨️ 1. Overview
 
 Since human civilization has entered the 21st century, most wealth exists in the form of book-entry interests. In order to regulate this wealth and transaction activities, various commercial legal rules, organizational by-laws and trading contracts have been established, and different centralized agents are involved in commercial activities. However, in the event that these rules, laws or contracts are violated, people can only rely on ex post facto judicial remedies to seek compensation for their losses. Such Judicial remedies have proven to be excessively expensive and time-consuming, and insufficient to fully recover for the incurred losses.
 
@@ -14,20 +14,20 @@ Based on the above concepts, we developed and deployed the **ComBoox** platform.
 
 **ComBoox** is a blockchain-based company records-keeping system to assist users to quickly establish a legal, secure, transparent, and reliable smart contracts system for automatically registering equity shares and keeping records of corporate governance.
 
-{% content-ref url="pain-points-of-corporate-governance.md" %}
-[pain-points-of-corporate-governance.md](pain-points-of-corporate-governance.md)
+{% content-ref url="1.1.-pain-points-of-corporate-governance.md" %}
+[1.1.-pain-points-of-corporate-governance.md](1.1.-pain-points-of-corporate-governance.md)
 {% endcontent-ref %}
 
-{% content-ref url="blockchain-solution.md" %}
-[blockchain-solution.md](blockchain-solution.md)
+{% content-ref url="1.2.-blockchain-solution.md" %}
+[1.2.-blockchain-solution.md](1.2.-blockchain-solution.md)
 {% endcontent-ref %}
 
-{% content-ref url="tokenization-and-company-evaluation.md" %}
-[tokenization-and-company-evaluation.md](tokenization-and-company-evaluation.md)
+{% content-ref url="1.3.-tokenization-and-company-evaluation.md" %}
+[1.3.-tokenization-and-company-evaluation.md](1.3.-tokenization-and-company-evaluation.md)
 {% endcontent-ref %}
 
-{% content-ref url="features-and-advantages.md" %}
-[features-and-advantages.md](features-and-advantages.md)
+{% content-ref url="1.4.-features-and-advantages.md" %}
+[1.4.-features-and-advantages.md](1.4.-features-and-advantages.md)
 {% endcontent-ref %}
 
 
