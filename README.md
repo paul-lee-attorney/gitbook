@@ -70,10 +70,7 @@ Want to have a try?  Below tutorial videos may help you.
 {% endtab %}
 
 {% tab title="Contracts" %}
-| RegCenter   | 0x18F7AE56d1e04B95A2C50AFd528aC3FCb6F23f91 |
-| ----------- | ------------------------------------------ |
-| FuelTank    | 0xEE478D37414aED8d1aF9a8A58469f816885e747A |
-| ComBoox DAO | 0x68233e877575e8c7e057e83ef0d16ffa7f98984d |
+<table data-header-hidden><thead><tr><th width="221.5"></th><th></th></tr></thead><tbody><tr><td>RegCenter</td><td>0x18F7AE56d1e04B95A2C50AFd528aC3FCb6F23f91</td></tr><tr><td>FuelTank</td><td>0xEE478D37414aED8d1aF9a8A58469f816885e747A</td></tr><tr><td>ComBoox DAO</td><td>0x68233e877575e8c7e057e83ef0d16ffa7f98984d</td></tr></tbody></table>
 {% endtab %}
 {% endtabs %}
 
