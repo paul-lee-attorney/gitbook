@@ -166,6 +166,36 @@ There are totally 【91】 external write APIs exposed by the system, which coll
 
 </details>
 
+<details>
+
+<summary><strong>6.8. APIs Routed to ROP Keeper</strong></summary>
+
+
+
+<table><thead><tr><th width="61.8203125">S.N.</th><th width="243.5859375">API</th><th>Description of Functions and Input Parameters</th></tr></thead><tbody><tr><td>52</td><td><p>function createPledge(</p><p>  bytes32 <em><mark style="color:blue;">snOfPld</mark></em>,</p><p>  uint256 <em><mark style="color:blue;">paid</mark></em>,</p><p>  uint256 <em><mark style="color:blue;">par</mark></em>,</p><p>  uint256 <em><mark style="color:blue;">guaranteedAmt</mark></em>,</p><p>  uint256 <em><mark style="color:blue;">execDays</mark></em></p><p>) external</p></td><td>(Any shareholder) Create a Pledge with the codified serial number <em>snOfPld</em> amount to paid value of <em>paid</em> and par value of <em>par</em> to guarantee the debt amount to <em>guarantedAmt</em> with the guarantee period lasting for number of days of <em>execDays</em>.</td></tr><tr><td>53</td><td><p>function transferPledge(</p><p>  uint256 <em><mark style="color:blue;">seqOfShare</mark></em>,</p><p>  uint256 <em><mark style="color:blue;">seqOfPld</mark></em>,</p><p>  uint256 <em><mark style="color:blue;">buyer</mark></em>,</p><p>  uint256 <em><mark style="color:blue;">amt</mark></em></p><p>) external</p></td><td>(The creditor) Transfer the Pledge numbered as <em>seqOfPld</em> setting up on the pledged share numbered <em>seqOfShare</em> to the user numbered as <em>buyer</em> with the credit amount to <em>amt</em>.</td></tr><tr><td>54</td><td><p>function refundDebt(</p><p>  uint256 <em><mark style="color:blue;">seqOfShare</mark></em>,</p><p>  uint256 <em><mark style="color:blue;">seqOfPld</mark></em>,</p><p>  uint256 <em><mark style="color:blue;">amt</mark></em></p><p>) external</p></td><td>(The creditor) Confirm refunding of the debt, guaranteed by the Pledge numbered as <em>seqOfPld</em> setting on the pledged share numbered as <em>seqOfShare,</em> by the amount of <em>amt</em>.</td></tr><tr><td>55</td><td><p>function extendPledge(</p><p>  uint256 <em><mark style="color:blue;">seqOfShare</mark></em>,</p><p>  uint256 <em><mark style="color:blue;">seqOfPld</mark></em>,</p><p>  uint256 <em><mark style="color:blue;">extDays</mark></em></p><p>) external</p></td><td>(The pledger) Extend the guarantee period of the Pledge numbered as <em>seqOfPld</em> setting on the pledged share numbered as <em>seqOfShare</em> for a such number of days as <em>extDays</em>.</td></tr><tr><td>56</td><td><p>function lockPledge(</p><p>  uint256 <em><mark style="color:blue;">seqOfShare</mark></em>,</p><p>  uint256 <em><mark style="color:blue;">seqOfPld</mark></em>,</p><p>  bytes32 <em><mark style="color:blue;">hashLock</mark></em></p><p>) external</p></td><td>(The creditor) Set up a hash lock with the hash value as <em>hashLock</em> on the Pledge numbered as <em>seqOfPld</em> setting on the pledged share numbered <em>seqOfShare</em>.</td></tr><tr><td>57</td><td><p>function releasePledge(</p><p>  uint256 <em><mark style="color:blue;">seqOfShare</mark></em>,</p><p>  uint256 <em><mark style="color:blue;">seqOfPld</mark></em>,</p><p>  string memory <em><mark style="color:blue;">hashKey</mark></em></p><p>) external</p></td><td>(The pledger, after paying off-chain and obtaining the hash key) Release the Pledge numbered as <em>seqOfPld</em> setting on the pledged share numbered <em>seqOfShare</em> by inputting the hash key string <em>hashKey</em>.</td></tr><tr><td>58</td><td><p>function execPledge(</p><p>  uint256 <em><mark style="color:blue;">seqOfShare</mark></em>,</p><p>  uint256 <em><mark style="color:blue;">seqOfPld</mark></em>,</p><p>  uint256 <em><mark style="color:blue;">buyer</mark></em>,</p><p>  uint256 <em><mark style="color:blue;">groupOfBuyer</mark></em></p><p>) external</p></td><td>(The creditor, after off-chain disposal and receipt of the consideration) Execute the Pledge numbered as <em>seqOfPld</em> setting on the pledged share numbered as <em>seqOfShare</em> to transfer the target share to the user numbered as <em>buyer</em> who belongs to the concert group represented by the user numbered as <em>groupOfBuyer</em>.</td></tr><tr><td>59</td><td><p>function revokePledge(</p><p>  uint256 <em><mark style="color:blue;">seqOfShare</mark></em>,</p><p>  uint256 <em><mark style="color:blue;">seqOfPld</mark></em></p><p>) external</p></td><td>(The pledger, after the expiration of the guarantee period) Revoke the Pledge numbered as <em>seqOfPld</em> setting on the pledged share numbered as <em>seqOfShare</em>.</td></tr></tbody></table>
+
+<figure><img src="../.gitbook/assets/ropkeeper-52.jpg" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/ropkeeper-53.jpg" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/ropkeeper-54.jpg" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/ropkeeper-55 (1).jpg" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/ropkeeper-56.jpg" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/ropkeeper-57.jpg" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/ropkeeper-58.jpg" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/ropkeeper-59.jpg" alt=""><figcaption></figcaption></figure>
+
+</details>
+
+
+
+
+
 
 
 
