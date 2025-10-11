@@ -280,7 +280,21 @@ There are totally 【91】 external write APIs exposed by the system, which coll
 
 </details>
 
+<details>
 
+<summary><strong>6.13. Other APIs concerning USDC payments</strong></summary>
+
+<table><thead><tr><th width="46.890625"></th><th width="228.50390625">API</th><th>Description of Functions and Input Parameters</th></tr></thead><tbody><tr><td>88</td><td><p>function payInCapital(</p><p>    ICashier.TransferAuth </p><p>    memory <em><mark style="color:blue;">auth</mark></em>,</p><p>    uint256 <em><mark style="color:blue;">seqOfShare</mark></em>,</p><p>    uint256 <em><mark style="color:blue;">paid</mark></em></p><p>) external</p></td><td>(The shareholder) Pay in capital, for its specific share numbered as <em><mark style="color:blue;">seqOfShare</mark></em>, to the amount of paid as <em><mark style="color:blue;">paid</mark></em>, by paying certain amount of USDC through off-chain authorization signed as <em><mark style="color:blue;">auth</mark>.</em></td></tr><tr><td>89</td><td><p>function payOffApprovedDeal(</p><p>  ICashier.TransferAuth </p><p>  memory <em><mark style="color:blue;">auth</mark></em>,</p><p>  address <em><mark style="color:blue;">ia</mark></em>,</p><p>  uint256 <em><mark style="color:blue;">seqOfDeal</mark></em>,</p><p>  address <em><mark style="color:blue;">to</mark></em></p><p>) external</p></td><td>(The buyer) Pay off the specific Deal numbered as <em><mark style="color:blue;">seqOfDeal</mark></em> in the Investment Agreement deployed as the address of <em><mark style="color:blue;">ia</mark></em>, by paying to the seller/issuer address <em><mark style="color:blue;">to</mark></em> certain amount of USDC as per the off-chain authorization signed as <em><mark style="color:blue;">auth</mark></em>, to close the Deal.</td></tr><tr><td>90</td><td><p>function payOffSwap(</p><p>  ICashier.TransferAuth </p><p>  memory <em><mark style="color:blue;">auth</mark></em>,</p><p>  uint256 <em><mark style="color:blue;">seqOfOpt</mark></em>,</p><p>  uint256 <em><mark style="color:blue;">seqOfSwap</mark></em>,</p><p>  address <em><mark style="color:blue;">to</mark></em></p><p>) external</p></td><td>(The pledger) Pay certain amount of USDC as per the off-chain authorization signed as <em><mark style="color:blue;">auth</mark></em>, to release the pledged share under the Swap numbered <em><mark style="color:blue;">seqOfSwap</mark></em> of the Option numbered as <em><mark style="color:blue;">seqOfOpt</mark></em>, to close the Swap.</td></tr><tr><td>91</td><td><p>function payOffRejectedDeal(</p><p>  ICashier.TransferAuth </p><p>  memory <em><mark style="color:blue;">auth</mark></em>,</p><p>  address <em><mark style="color:blue;">ia</mark></em>,</p><p>  uint256 <em><mark style="color:blue;">seqOfDeal</mark></em>,</p><p>  uint256 <em><mark style="color:blue;">seqOfSwap</mark></em>,</p><p>  address <em><mark style="color:blue;">to</mark></em></p><p>) external;</p></td><td>(The veto Member who has voted against the Deal) Pay certain amount of USDC as per the off-chain authorization signed as <em><mark style="color:blue;">auth</mark></em>, to close the Swap numbered as <em><mark style="color:blue;">seqOfSWap</mark></em> created by the seller for the Deal numbered as <em><mark style="color:blue;">seqOfDeal</mark></em> under the Investment Agreement deployed at the address of <em><mark style="color:blue;">ia</mark></em>.</td></tr></tbody></table>
+
+<figure><img src="../.gitbook/assets/usdkeeper-88.jpg" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/usdkeeper-89.jpg" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/usdkeeper-90.jpg" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/usdkeeper-91.jpg" alt=""><figcaption></figcaption></figure>
+
+</details>
 
 
 
