@@ -6,7 +6,7 @@ The write commands in the system can be divided into three categories:
 
 1. **System Configuration**: refers to the contracts drafting and system configuration actions triggered by external accounts, which will NOT lead to legal consequences;
 2. **Legal Acts**: refers to the share transaction and corporate governance activities triggered by external accounts, which WILL directly lead to legal consequences; and
-3. **Algorithmic Control**: refers to the write commands sent by **Bookkeeper**, upon receiving the previous two types of write commands, in accordance with the predefined algorithms of system, in an orderly manner and be able to change the states of other smart contracts like **Registers, Shareholders Agreement**, or **Investment Agreement**.
+3. **Algorithmic Control**: refers to the write commands routed by **Bookkeeper**, upon receiving the previous two types of write commands, in accordance with the predefined algorithms of system, in an orderly manner and be able to change the states of other smart contracts like **Registers, Shareholders Agreement**, or **Investment Agreement**.
 
 For the above write commands, the system adopts three verification methods as per their different nature of behaviors and scopes of influence.
 
