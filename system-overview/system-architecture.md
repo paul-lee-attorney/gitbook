@@ -49,9 +49,11 @@ Based on the types of information recorded, **Registers** can be divided into tw
 7. **Register of Options ("ROO")**: record all information of (call / put) options with respect to their right holders, obligors, execution period, closing period, trigger conditions, exercise price, class and amount of the subject euqity, etc;
 8. **Register of Pledges ("ROP"):** record all pledges attached to the equity shares with respect to their creditor, debtor, pledgor, pledged amount, guaranteed amount, debt expiration date, guarantee period etc;
 9. **Register of Shares ("ROS")**: record all equity shares issued by the company with respect to their shareholders, class, voting weight, issue date, paid-in deadline / date, par value, paid-in amount, issue price and so on;
-10. **List of ETH Orders ("LOE"** or **"LOO")**: record all information about listing trade of shares in ETH with respect to the subject shares class, sequence number, investors, limited sell orders, limited buy orders, and deals closed etc.
-11. **Cashier**: record all USDC payment transactions related to the Company, including details of the payer, payee, purpose of payment, authorization for USDC collection, and other relevant information.
-12. **List of USD Orders ("Usd LOO"** or **"LOU")**: record all information about listing trade of shares in USDC with respect to the subject shares class, sequence number, investors, limited sell orders, limited buy orders, and deals closed etc.
+10. **List of Orders ("LOO")**: record all information about listing trade of shares in USDC with respect to the subject shares class, sequence number, investors, limited sell orders, limited buy orders, and deals closed etc.
+11. **Register of Investors** (“**ROI**”): record all information about investors who intend to invest in the Company with respect to their user number, group representative’s user number, registration date, verifier’s user number, approved date, registration state, and hash value of ID documents.
+12. **Bank**: the official address of the smart contract deployed by Circle Internet Financial that automatically records users’ USDC balances and transaction records.
+13. **Cashier**: record all USDC payment transactions related to the Company, including details of the payer, payee, purpose of payment, authorization for USDC collection, and other relevant information.
+14. **Register of Redemptions** ("**ROR**"): records all information relating to redemption requests for redeemable fund shares and the execution thereof, including, without limitation, the class number, share sequence number, net asset value (NAV) price, shareholder user number, amount of paid, redemption value in USDC, and the sequence of the relevant request package.
 
 </details>
 
@@ -95,51 +97,39 @@ In order to satisfy the size requirements of EIP170, **ComBoox** defines two typ
 
 (3)    Represents the legal entity of the company and conducts legal behaviors on behalf the company on-chain, e.g. signing or executing smart contracts, making payments in tokens, exercising voting rights, etc;
 
-(4)    Represents the company to hold cryptocurrencies such as ETH and CBP etc., and makes payments in accordance with the resolutions of General Meeting of Members or Board of Directors;
-
-(5)    Temporarily keeps ETH income (or balance) incurred from share transfer transactions or asset distributions, which can be picked up by the seller or shareholder to its public key account thereafter.
+(4)    Represents the company to hold cryptocurrencies such as ETH and CBP etc., and makes payments in accordance with the resolutions of General Meeting of Members or Board of Directors.
 
 ***
 
 3. **Sub-Bookkeepers**
 
-**Sub-Bookkeepers** are the core computation layer controlling the identity verification, conditions, procedures and legal consequences of legal behaviors, which includes:
+**Sub-Bookkeepers** are the core computation layer controlling the identity verification, conditions, procedures and legal consequences of legal behaviors. They do not store any state variables and operate in a manner analogous to libraries. The General Keeper identifies and retrieves the address of the relevant Sub-Bookkeeper to be invoked by reference to the function selector (i.e., the first four bytes of the keccak256 hash of the function signature), and subsequently invokes the corresponding function of such Sub-Bookkeeper by means of a delegatecall. Accordingly, the specific algorithms defined in the functions of each Sub-Bookkeeper are executed within the context of the General Keeper, such that all computations are performed against the General Keeper’s state. The Sub Keepers include the followings:
 
-**(1) Register of Constitution** **Keeper ("ROC Keeper")**: has write permissions to **Register of Agreements**, and controls the legal behaviors of creating, circulating, signing, activating, and accepting **Shareholders Agreements**;
+**(1) Register of Constitution** **Keeper ("ROC Keeper")**: routes write commands to **Register of Agreements**, and controls the legal behaviors of creating, circulating, signing, activating, and accepting **Shareholders Agreements**;
 
-**(2) Register of Directors Keeper ("ROD Keeper")**: has write permissions to **Register of Directors**, and controls the legal behaviors of inauguration, dismissal, and resignation of directors or executive officers;
+**(2) Register of Directors Keeper ("ROD Keeper")**: routes write commands to **Register of Directors**, and controls the legal behaviors of inauguration, dismissal, and resignation of directors or executive officers;
 
-**(3) Board Meeting Minutes Keeper ("BMMKeeper")**: has write permissions to **Board Meeting Minutes**, and controls the legal behaviors of creating and proposing board motions, appointing voting delegate, casting vote, counting of vote results, and executing actions. The motions concerned include the appointing and removing managers, reviewing contracts, paying tokens, and calling on-chain smart contracts;
+**(3) Board Meeting Minutes Keeper ("BMMKeeper")**: routes write commands to **Board Meeting Minutes**, and controls the legal behaviors of creating and proposing board motions, appointing voting delegate, casting vote, counting of vote results, and executing actions. The motions concerned include the appointing and removing managers, reviewing contracts, paying tokens, and calling on-chain smart contracts;
 
-**(4) Register of Members Keeper ("ROMKeeper")**: has write permissions to **Register of Shares** and **Register of Members**, and controls the legal behaviors of setting the maximum number of shareholders, setting hash locks on paid-in shares, releasing and withdrawing paid-in shares, and decreasing registered capital;
+**(4) Register of Members Keeper ("ROMKeeper")**: routes write commands to **Register of Shares** and **Register of Members**, and controls the legal behaviors of setting the maximum number of shareholders, setting hash locks on paid-in shares, releasing and withdrawing paid-in shares, and decreasing registered capital;
 
-**(5) General Meeting Minutes Keeper ("GMMKeeper")**: has write permissions to **General Meeting Minutes**, and controls the legal behaviors of creating and proposing motions, appointing voting delegate, casting votes, counting vote results, and executing resolutions. The motions include nominating and removing directors, reviewing contracts, paying tokens and calling smart contracts;
+**(5) General Meeting Minutes Keeper ("GMMKeeper")**: routes write commands to **General Meeting Minutes**, and controls the legal behaviors of creating and proposing motions, appointing voting delegate, casting votes, counting vote results, and executing resolutions. The motions include nominating and removing directors, reviewing contracts, paying tokens and calling smart contracts;
 
-**(6) Register of Agreements** **Keeper ("ROA Keeper")**: has write permissions to **Register of Agreements** and **Register of Shares**, and controls the legal behaviors of creation, circulation, and signing of **Investment Agreements**, as well as locking the subject equity, releasing and withdrawing the subject equity, issuing new shares, transferring share, terminating transaction, and paying consideration;
+**(6) Register of Agreements** **Keeper ("ROA Keeper")**: routes write commands to **Register of Agreements** and **Register of Shares**, and controls the legal behaviors of creation, circulation, and signing of **Investment Agreements**, as well as locking the subject equity, releasing and withdrawing the subject equity, issuing new shares, transferring share, terminating transaction, and paying consideration;
 
-**(7) Register of Options Keeper ("ROO Keeper")**: has write permissions to **Register of Options** and **Register of Shares**, and controls the legal behaviors of inputting trigger events, exercising options, setting option’s pledge, paying off option, executing option’s pledge, requesting the against member to buy, paying consideration for the rejected deal’s equity shares, and executing the against member's pledge;
+**(7) Register of Options Keeper ("ROO Keeper")**: routes write commands to **Register of Options** and **Register of Shares**, and controls the legal behaviors of inputting trigger events, exercising options, setting option’s pledge, paying off option, executing option’s pledge, requesting the against member to buy, paying consideration for the rejected deal’s equity shares, and executing the against member's pledge;
 
-**(8) Register of Pledges Keeper ("ROP Keeper"):** has write permissions to **Register of Pledges**, **Register of Shares**, and **Register of Agreements**, and controls the legal behaviors of refunding debts, extending secured period, creating, transferring, executing, locking, releasing, withdrawing and revoking pledges;
+**(8) Register of Pledges Keeper ("ROP Keeper"):** routes write commands to **Register of Pledges**, **Register of Shares**, and **Register of Agreements**, and controls the legal behaviors of refunding debts, extending secured period, creating, transferring, executing, locking, releasing, withdrawing and revoking pledges;
 
-**(9) Shareholders Agreement Keeper ("SHA Keeper")**: has write permissions to **Register of Shares** and **Register of Agreements**, and controls the legal behaviors of exercising and accepting special shareholders' rights like Drag-Along, Tag-Along, Anti-Dilution and First Refusal;
+**(9) Shareholders Agreement Keeper ("SHA Keeper")**: routes write commands to **Register of Shares** and **Register of Agreements**, and controls the legal behaviors of exercising and accepting special shareholders' rights like Drag-Along, Tag-Along, Anti-Dilution and First Refusal;
 
-**(10) List of ETH Orders Keeper ("LOE Keeper")**: has write permissions to **List of Orders**, **Register of Shares**, and **Register of Members**, and controls legal behaviors of registering, approving and revoking accredited investors, listing and withdrawing initial offers, sell orders, and placing buy orders.
+**(10) List of Orders Keeper ("LOO Keeper")**: routes write commands to **List of Orders**, **Register of Shares**, and **Register of Members**, and controls legal behaviors of listing and withdrawing initial offers, sell orders, and placing buy orders.
 
-***
+**(11) Accountant**: routes write commands to Cashier, General Meeting Minutes and/or Borad Meeting Minutes, and controls the legal behaviors of distribution of profits or income, and the transfer of funds;
 
-4. **USDC concerned Sub-Bookkeepers**
+**(12) Register of Redemptions Keeper** ("**ROR Keeper**"): routes write commands to Register of Redemptions, Register of Shares, and Cashier, and controls the legal behaviors of addition or removal of redeemable classes, submission of redemption request and the redemption of the requested shares.
 
-To facilitate user payments in USDC for equity consideration, margin deposits, and related expenses, the system introduces a set of specialized Sub-Bookkeepers, including:
-
-**(11) USD Keeper**: has write permissions to Cashier, and generally controls legal acts of collecting, forwarding, transferring, holding and releasing USDC to or from **Cashier**;
-
-**(12) UsdROM Keeper**: has write permissions to Register of Shares, and controls legal behaviors of pay in capital in USDC;
-
-**(13) UsdROA Keeper**: has write permissions to ROAKeeper, and controls legal behaviors of pay off approved deal in USDC;
-
-**(14) LOU Keeper**: has write permissions to LOU, Register of Shares, and Register of Members, and controls legal behaviors of listing and withdrawing initial offers, sell orders, and buy orders to be settled in USDC;
-
-**(15) UsdROO Keeper:** has write permissions to ROO Keeper, and controls legal behaviors of pay off swap and pay off rejected deal.
+To facilitate user payments in USDC for equity consideration, margin deposits, and related expenses, the ROA Keeper, ROM Keeper, LOO Keeper, and ROO Keeper are designed to route write commands to Cashier to execute USDC payment transactions in connection with equity trades or capital contributions.
 
 </details>
 
