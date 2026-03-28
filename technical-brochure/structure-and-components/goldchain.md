@@ -47,8 +47,7 @@ The query API well describes the function and usage of the **Golden Chain** in t
 | getSeqList | Get a list of all sell order numbers.                                |
 | getChain   | Get a list of all sell order node objects.                           |
 
-\
-
+<br>
 
 ## Source Code
 

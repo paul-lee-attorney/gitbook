@@ -19,8 +19,7 @@ description: '---- A Blockchain-Based Company Book-Entry Platform'
 >
 > (2) obligors have **no chance** to default or violate; and
 >
-> (3) **real-time** disclosure of full information.\
->
+> (3) **real-time** disclosure of full information.<br>
 
 {% embed url="https://youtu.be/FCEKZAFHKxU" %}
 Welcome To ComBoox !
@@ -32,8 +31,8 @@ Welcome To ComBoox !
 [overview](system-overview/overview/)
 {% endcontent-ref %}
 
-{% content-ref url="broken-reference" %}
-[Broken link](broken-reference)
+{% content-ref url="/broken/pages/OLoD4nRaN80cFtr5QDOo" %}
+[Broken link](/broken/pages/OLoD4nRaN80cFtr5QDOo)
 {% endcontent-ref %}
 
 {% content-ref url="https://app.gitbook.com/s/bTRjM2PujnZxSvv5X3VP/" %}
@@ -50,8 +49,8 @@ Welcome To ComBoox !
 
 Want to have a try?  Below tutorial videos may help you.
 
-{% content-ref url="broken-reference" %}
-[Broken link](broken-reference)
+{% content-ref url="/broken/pages/UNjRDCcLwhSkFOq7MtLN" %}
+[Broken link](/broken/pages/UNjRDCcLwhSkFOq7MtLN)
 {% endcontent-ref %}
 
 

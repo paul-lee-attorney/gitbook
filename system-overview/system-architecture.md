@@ -2,7 +2,7 @@
 
 [**ComBoox**](https://comboox.vercel.app) consists of four major types of smart contracts: **Registers**, **Bookkeepers**, **Shareholders Agreements** and **Investment Agreements**.
 
-<figure><img src="../.gitbook/assets/dcf47cc59bc4eb2424bb04d2d0ef691.jpg" alt=""><figcaption><p>Diagram of System Architecture</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/SysArch.jpg" alt=""><figcaption></figcaption></figure>
 
 <details>
 
