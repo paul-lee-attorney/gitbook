@@ -16,9 +16,13 @@ For the above write commands, the system adopts three verification methods as pe
 
 For **System Configuration** and **Algorithmic Control**, these two types of write commands do not dispose any book-entry interests of the system, and usually only take effects within the scope of the company, therefore, belong to the category of technique activities like system configuration, algorithmic control, and operation maintenance. Therefore, **ComBoox** adopts special smart contracts of **Ownable**, **Access Control** and **Draft Control**, which are inheritable and with component attributes, to verify identity of message sender by means of checking their address at the level of each smart contract.
 
+
+
 1. **Ownable**
 
-**Ownership** is a reusable, inheritable, component-based smart contract, which specialized in defining address accounts of “**Owner**” and “**Reg Center**”. Clone contracts created through **Reg Center** are descendant of the **Ownership** contract. The address of **Reg Center** cannot be changed once it is set, while the **Owner** can transfer his/her role to other accounts.
+**Ownership** is a reusable, inheritable, component-based smart contract, which specialized in defining address accounts of “**Owner**” and “**Reg Center**”. Clone contracts and proxy contracts created through **Reg Center** are descendant of the **Owneable** contract. The address of **Reg Center** cannot be changed once it is set, while the **Owner** can transfer its role to other accounts.
+
+
 
 2. **Access Control**
 
@@ -26,11 +30,15 @@ A**ccess Control** is a reusable, inheritable, component-based smart contract. E
 
 **AccessControl** defines two special roles, "**General Keeper"** and "**Direct Keeper"**, as well as a pre-defined role group ---- **Attorneys** (the admin of which is called as "**General Counsel**").
 
+
+
 3. **Draft Control**
 
 **Draft Control** is a reusable, inheritable, component-based smart contract designed to define role groupings and their verification logic at the smart contract level. It is a descendant contract of **Access Control** and introduces a specialized role group known as **Attorneys**, whose administrative authority is assigned to a role referred to as the **General Counsel**. Only the EOA having Attorney role may edit or configure the terms of **Investment Agreement** or **Shareholders Agreement**.
 
 Therefore, **Investment Agreement**, **Shareholders Agreement, Alongs, AntiDilution, LockUp,** and **Options** are all descendant contracts of **Draft Control**
+
+
 
 4. **Owner**
 
@@ -40,13 +48,17 @@ Therefore, **Investment Agreement**, **Shareholders Agreement, Alongs, AntiDilut
 
 **Direct Keeper** is the special role that cannot be influenced by **Owner**, which ensures its relative independence with respect to the roles appointment and control rights assignment, so as to check and balance the power of **Owner** from the perspective of system maintenance or duties independence.
 
+
+
 5. **Direct Keeper**
 
-**Direct Keeper** can be initially set by the account deploying of the smart contract, which has special authority to configure system, mapping the role of "Company Secretary" or “Accountants” from the commercial and legal view, the authority design of which reflects the characteristics of “Company Secretary” or “Accountants” who are relatively independent from shareholders and senior executives in system maintenance and assuming independent responsibilities.
+**Direct Keeper** can be initially set by the account deploying of the smart contract, which has special authority to configure system, mapping the role of "Company Secretary" or “Accountants” from the commercial and legal view, the authority design of which reflects the characteristics of “Company Secretary” who is relatively independent from shareholders and senior executives in system maintenance and assuming independent responsibilities.
 
-**Direct Keeper** can transfer its role to other accounts, and will lose the role of **Direct Keeper** thereafter.
+**Direct Keeper** can transfer its role to other accounts, and will lose the role of **Direct Keeper** thereafter. The General Keeper and all Registers inherit the standard smart contract of “**UUPSUpgradeable**”, thereby possessing the capability to be upgraded without any change to their respective addresses or state variables. Only the Direct Keeper or the General Keeper is authorized to invoke the “upgradeTo()” function. Accordingly, the Company may elect to upgrade its General Keeper or Registers through either of the following methods: (i) by utilizing the General Keeper to transmit a pre-programmed payload to the target smart contract in order to trigger the upgrade function, or (ii) by transferring the Direct Keeper role to an externally owned account (EOA) and causing such EOA to invoke the upgrade function directly. The former method is subject to the Members’ voting procedures and is therefore more secure, whereas the latter method is comparatively simpler to execute, as it does not require the programming or encoding of complex payloads.
 
-All write APIs of **SubKeepers** are set as only accessible for their **Direct Keepers** or other **SubKeepers**. In this way, all the write authorities will be collectively authorized to **General Keeper** or other **SubKeepers**, thus excluding any external accounts or external contracts out of the system interfering with the company's governance activities, and ensuring that the company's book-entry records can operate securely and automatically, without any human interference involved.
+All write APIs of the Sub-Keepers are designed to be invoked exclusively through delegate calls initiated by the respective General Keeper; accordingly, all computations are performed within the context of the calling General Keeper. In this manner, any read or write commands sent by the Sub-Keepers may only be directed to the Registers’ address retrieved by the calling General Keeper through its “getBook()” function. As a result, external accounts and third-party contracts are effectively precluded from interfering with the Company’s governance activities, thereby ensuring that the Company’s book-entry records operate securely and automatically, without human intervention.
+
+In addition, all write APIs of the Registers are restricted to access solely by their respective Direct Keeper or General Keeper. During the creation and initialization of the Company’s book-entry system, the Direct Keeper role of each Register is assigned to the relevant General Keeper. Thereafter, access to the write APIs of the Registers shall be restricted exclusively to the General Keeper. This restriction serves as a second layer of security to prevent unauthorized external access.
 
 The "**Direct Keeper**" of **General Keeper** has the following special authorities:
 
@@ -57,7 +69,9 @@ The "**Direct Keeper**" of **General Keeper** has the following special authorit
 
 Therefore, the characters of its authority are quite similar to "**Company Secretary**" or "**Chief Accountant**".
 
-If **Direct Keeper** of **General Keeper** transfers its role to "zero address", then it means the possibility of human interference with the company's book-entry system is completely abandoned, and the system will automatically operate by smart contracts.  As a cost, such auto-running system cannot be upgraded with new contract templates, neither can use off-chain data as trigger conditions for special rights (like call option or put option) any more.
+If **Direct Keeper** of **General Keeper** transfers its role to the **General Keeper**, then it means the possibility of human interference with the company's book-entry system is completely abandoned, and the system will automatically operate strictly in accordance with the Shareholders Agreement by smart contracts.&#x20;
+
+
 
 6. **General Counsel and Attorneys**
 
@@ -77,15 +91,17 @@ It should be emphasised that if **Owner** does not transfer its role to "zero ad
 
 <summary>4.2. Commands Routing Mechanism within a company</summary>
 
-A **Register** usually allows several **SubKeepers** to call its write APIs, therefore, it is not economic to rely on **AccessControl** solution to control write authorities among different roles for each of the contracts.  Therefore, **ComBoox** sets up two registration mappings of address in **GeneralKeeper** to satisfy the routing requirements for **Algorithmic Control** commands among the book-entry **Registers** of a company.
+The **General Keeper** serves as the sole entry point for all write commands relating to legal acts and maintains two mappings to record, retrieve and route commands to the addresses of the **Sub-Keepers** and **Registers** by reference to their respective sequence numbers. Accordingly, upon receiving any write command, the General Keeper utilizes the Sub-Keeper mapping to route such command to the appropriate address.
 
-There are two special registration mappings of address in the **General Keeper**, which are used to track and record the addresses of "**SubKeepers**" and "**Registers**", and adopt a structure of "sequence number => address" so as to ensure a timely search of the corresponding address as per the sequence number concerned.
+**Sub-Keepers** constitute the core computational layer governing identity verification, conditions, procedures, and the legal consequences of relevant actions. They do not store any state variables and operate in a manner analogous to libraries, being invoked exclusively through delegate calls initiated by the **General Keeper**. Accordingly, any calls routed through the **Sub-Keepers** are executed within the context of the **General Keeper**, such that the **General Keeper** is reflected as the “msg.sender”.
 
-When deploying the system, the contract addresses of each **SubKeeper** and **Register** will be input into the registration mappings accordingly, thereafter, in runtime, the relevant write API of **Register** will, before processing the write command received, firstly call **General Keeper** to query and verify whether the message sender’s address equals to the address of the specific contract registered in the mappings, so as to complete the identity verification for the **Algorithmic Control Commands**.
+All write APIs of the Registers are accessible solely by their respective Direct Keeper or the General Keeper. Upon the creation of each Register, the address of the General Keeper is permanently recorded therein, and the **Direct Keeper** role is transferred to the General Keeper in the initiation process. Consequently, command calls initiated by the General Keeper and routed through the Sub-Keepers via delegate call are duly verified and permitted to access the relevant APIs of the Registers. Conversely, any unauthorized calls originating from accounts other than the General Keeper are effectively excluded and blocked.
 
-***
+Through this mechanism, the General Keeper automatically routes write commands to the appropriate Sub-Keeper, and the specific algorithms defined within each Sub-Keeper are executed within the context of the General Keeper, such that all computations are performed against the General Keeper’s state.
 
-For example, the share transfer API of **Register of Shares** will be called by **ROA Keeper** when closing a share transfer transaction, and will also be called by **SHA Keeper** when implementing an Anti-Dilution right. Therefore, **Register of Shares** cannot rely on the unique role of “**Direct Keeper**” defined by **Access Control** to control its write permission, instead, it will query the address mapping of **General Keeper** or **USD Keeper** to check and verify message sender’s identity, i.e. as long as the account address of the caller can match any one of the two contracts mentioned above, the verification will be passed.
+As a result, external accounts and third-party contracts are effectively precluded from interfering with the Company’s governance activities, thereby ensuring that the Company’s book-entry records operate securely and autonomously, without human intervention.
+
+
 
 </details>
 
@@ -117,9 +133,9 @@ With the concept of distributed digital identity, **Reg Center** uses a special 
 
 **1. User Number Mapping**
 
-**User Number Mapping** takes a structure as "address => uint(40)", which can be queried via a special API for the corresponding user number with a specific account address.
+**User Number Mapping** takes a structure as "address => uint256", which can be queried via a special API for the corresponding user number with a specific account address.
 
-When users exercise their rights, the **SubKeepers** of the relevant company invoke, through a dedicated middleware smart contract known as **Royalty Charge**, the query API of the **Reg Center**. This **Royalty Charge**, which the **SubKeepers** have inherited, enables them to retrieve the user number of the message sender. The system then verifies the user’s identity and access rights based on the records maintained in the corresponding **Register**.
+When users exercise their rights, the **SubKeepers** of the relevant company invoke, through a dedicated middleware library smart contract known as **Royalty Charge**, the query API of the **Reg Center**. This **Royalty Charge**, enables the Sub-Keepers to retrieve the user number of the message sender. The system then verifies the user’s identity and access rights based on the records maintained in the corresponding **Register**.
 
 For example, when shareholders exercise voting rights, **GMM Keeper** of the company will firstly call **Reg Center** to query the user number of the message sender, upon receiving the response, **General Keeper** will pass the returned value of user number along with other input parameters to the **General Meeting Minutes Keeper ("GMM Keeper")**, and **GMM Keeper** will further call **Register of Members** to check whether the user is a member of the company. If the answer is yes, **GMM Keeper** will continue to execute the rest codes accordingly, otherwise, it will terminate the process and return an error message instead.
 
