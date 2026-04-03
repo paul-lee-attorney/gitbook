@@ -185,13 +185,13 @@ Currently the rules include following types: **General Governance Rules, Voting 
 
     The **First Refusal Rules** govern shareholders’ pre-emptive rights to subscribe for newly issued equity or rights of first refusal to purchase equity proposed to be transferred. Such rights may be granted equally to all shareholders or conferred upon specific ones. The allocation of the subject equity may be made pro rata based on voting rights or in accordance with the chronological order in which such rights are exercised. Up to 256 distinct first-refusal rules may be established to apply to different transaction types and different combinations of entitled parties.
 
-<br>
+
 
 *   **(5) Group Update Order (No. 768 \~ 1023)**<br>
 
     **Group Update Orders** are used to define and update groups of affiliated shareholders (or persons acting in concert). Each group is identified by a representative shareholder’s user number. During the activation process of a **Shareholders Agreement**, the system automatically executes the **Group Update Orders** contained therein to add specified users into, or remove them from, a particular affiliation group. A proposal for updating **Shareholders Agreement** with **Group Update Orders** effectively constitutes a declaration and disclosure by the relevant shareholders of their affiliated relationships. Accordingly, the review and approval of such motion signifies the General Meeting’s acknowledgment and approval of such relationships.
 
-<br>
+
 
 *   **(6) Listing Rule (No. 1024 \~ 1280)**
 
@@ -214,9 +214,9 @@ Currently the terms include the following types: **Anti Dilution, Lock Up, Drag 
 
     To facilitate the drafting and amendment of the **Anti Dilution** by users, the following lists the editorial API interfaces that may be invoked by external accounts.
 
+
+
 <table><thead><tr><th width="267.25">API</th><th>Description of Functions and Parameters</th></tr></thead><tbody><tr><td><p>function <strong>addBenchmark</strong>(</p><p>    uint256 <em>class</em>, uint <em>price</em></p><p>) external;</p></td><td>Add an anti-dilution benchmark specifying that the issue price of shares with class sequence number <em>class</em> shall not be lower than <em>price</em>.</td></tr><tr><td><p>function <strong>removeBenchmark</strong>(</p><p>    uint256 <em>class</em></p><p>) external;</p></td><td>Remove the anti-dilution benchmark applicable to the issue price of shares with class sequence number <em>class</em>.</td></tr><tr><td><p>function <strong>addObligor</strong>(</p><p>    uint256 <em>class</em>, uint256 <em>obligor</em></p><p>) external;</p></td><td>Add a user with sequence number <em>obligor</em> who shall assume the compensation liabilities if the issue price of shares with class sequence number <em>class</em> falls below its anti-dilution benchmark.</td></tr><tr><td><p>function <strong>removeObligor</strong>(</p><p>    uint256 <em>class</em>, uint256 <em>obligor</em></p><p>) external;</p></td><td>Remove the user with sequence number <em>obligor</em> from the group responsible for assuming the compensation liabilities arising from the anti-dilution obligation applicable to shares with class sequence number <em>class</em>.</td></tr></tbody></table>
-
-
 
 
 
@@ -225,6 +225,10 @@ Currently the terms include the following types: **Anti Dilution, Lock Up, Drag 
     **Lock Up** is a specialized smart contract designed to define and monitor shares subject to transfer restrictions. For each locked shares, the contract assigns a dedicated “locker” that records the lock-up expiration date and the user numbers of the designated “key holders” whose consent is required for any early release. The subject share may be transferred prior to the expiration of the lock-up period only with the unanimous consent of all key holders; otherwise, the system will automatically reject the proposed transfer. If the lock-up expiration date is set to zero, the share shall remain permanently locked and non-transferable unless all key holders unanimously approve its release.<br>
 
     To facilitate the drafting and amendment of the Lock Up by users, the following lists the editorial API interfaces that may be invoked by external accounts.
+
+
+
+<table><thead><tr><th width="247.609375">API</th><th>Description of Functions and Parameters</th></tr></thead><tbody><tr><td><p>function <strong>setLocker</strong>(</p><p>    uint256 <em>seqOfShare</em>, </p><p>    uint <em>dueDate</em></p><p>) external;</p></td><td>Set the locker for the specific share with sequence number <em>seqOfShare</em> to be locked from sale until <em>dueDate</em>.</td></tr><tr><td><p>function <strong>delLocker</strong>(</p><p>    uint256 seqOfShare</p><p>) external;</p></td><td>Delete the locker for the specific share with sequence number <em>seqOfShare</em>.</td></tr><tr><td><p>function <strong>addKeyholder</strong>(</p><p>    uint256 <em>seqOfShare</em>,</p><p>    uint256 <em>keyholder</em></p><p>) external;</p></td><td>Add the user with number <em>keyholder</em>, who is required to vote on the motion to unlock the locker for the share with sequence number <em>seqOfShare</em> before the due date.</td></tr><tr><td><p>function <strong>removeKeyholder</strong>(</p><p>    uint256 <em>seqOfShare</em>, </p><p>    uint256 <em>keyholder</em></p><p>) external;</p></td><td>Remove the user with number <em>keyholder</em>, who is required to vote on the motion to unlock the locker for the share with sequence number <em>seqOfShare</em> before the due date.</td></tr></tbody></table>
 
 
 
@@ -238,6 +242,10 @@ Currently the terms include the following types: **Anti Dilution, Lock Up, Drag 
 
 
 
+<table><thead><tr><th width="225.8828125">API</th><th>Description of Functions and Parameters</th></tr></thead><tbody><tr><td><p>function <strong>addDragger</strong>(</p><p>    bytes32 <em>rule</em>,</p><p>    uint256 <em>dragger</em></p><p>) external;</p></td><td>Add the user with sequence number <em>dragger</em> to the link rule codified as <em>rule</em> to establish a new Drag/Tag-Along arrangement.</td></tr><tr><td><p>function <strong>removeDragger</strong>(</p><p>    uint256 <em>dragger</em></p><p>) external;</p></td><td>Remove the user with sequence number <em>dragger</em> to delete the corresponding Drag/Tag-Along arrangement.</td></tr><tr><td><p>function <strong>addFollower</strong>(</p><p>    uint256 <em>dragger</em>,</p><p>    uint256 <em>follower</em></p><p>) external;</p></td><td>Add the user with sequence number <em>follower</em> to the Drag/Tag Along arrangement associated with the selling party identified by the user sequence number <em>dragger</em>.</td></tr><tr><td><p>function <strong>removeFollower</strong>(</p><p>    uint256 <em>dragger</em>,</p><p>    uint256 <em>follower</em></p><p>) external;</p></td><td>Remove the user with sequence number <em>follower</em> from the Drag/Tag Along arrangement associated with the selling party identified by the user sequence number <em>dragger</em>.</td></tr></tbody></table>
+
+
+
 * **(4) Put/Call Option**\
   \
   **Put/Call Option** is a specialized smart contract designed to define and enforce the compulsory purchase or sale of a specified quantity and class of shares at a predetermined price. By flexibly configuring the exercise conditions, it can be used to implement complex equity investment arrangements, such as valuation adjustments and mandatory buybacks.\
@@ -246,11 +254,17 @@ Currently the terms include the following types: **Anti Dilution, Lock Up, Drag 
 
 
 
+<table><thead><tr><th width="301.4609375">API</th><th>Description of Functions and Parameters</th></tr></thead><tbody><tr><td><p>function <strong>createOption</strong>(</p><p>    bytes32 <em>snOfOpt</em>, </p><p>    bytes32 <em>snOfCond</em>,</p><p>    uint <em>rightholder</em>, </p><p>    uint <em>paid</em>, uint <em>par</em></p><p>) external returns</p><p>(OptionsRepo.Head memory head);</p></td><td>Create a new Put/Call Option under which the option terms are codified as <em>snOfOpt</em>, the trigger condition is codified as <em>snOfCond</em>, the paid value is <em>paid</em>, the par value is <em>par</em>, and the right holder is the user identified by sequence number <em>rightholder</em>.</td></tr><tr><td><p>function <strong>delOption</strong>(</p><p>    uint256 <em>seqOfOpt</em></p><p>) external returns(bool flag);</p></td><td>Remove the Put/Call Option identified by the sequence number seqOfOpt.</td></tr><tr><td><p>function <strong>addObligorIntoOpt</strong>(</p><p>    uint256 <em>seqOfOpt</em>, </p><p>    uint256 <em>obligor</em></p><p>) external returns (bool flag);</p></td><td>Add the obligor identified by user sequence number <em>obligor</em> to the Put/Call Option identified by sequence number <em>seqOfOpt</em>.</td></tr><tr><td><p>function <strong>removeObligorFromOpt</strong>(</p><p>    uint256 <em>seqOfOpt</em>, </p><p>    uint256 <em>obligor</em></p><p>) external returns (bool flag);</p></td><td>Remove the obligor identified by user sequence number <em>obligor</em> from the Put/Call Option identified by sequence number <em>seqOfOpt</em>.</td></tr></tbody></table>
+
+
+
 3. **Editorial APIs of Shareholders Agreement**
 
 Therefore, **Shareholders Agreement** can be deemed as a data base comprises of “rules mapping” and “terms mapping”, which is to dynamically define the parameters and attributes of different rules so as to retrieve them in runtime.  As for the functions of **Rules Parser** and **Terms**, they are to set up models for the rules and terms in line with legal logic, and to abstractly define their core attributes and methods, thereafter, expose certain APIs so as for users to dynamically define various attributes or parameters of those rules and terms accordingly.  So that, during runtime, in accordance with user’s commands, specific **Bookkeeper** may search **Shareholders Agreement** as per the predefined logic of specific legal behavior, to get specific attribute or parameter of certain rule, and then, to further determine certain condition or to further control certain process.
 
 The external APIs of the **Shareholders Agreement** are primarily used to add, remove, or query **Terms** and **Rules**. To facilitate the drafting and amendment of the Shareholders Agreement by users, the following lists the editorial API interfaces related to contract drafting and inquiry that may be invoked by external accounts.
+
+
 
 <table><thead><tr><th width="220.86328125">API</th><th>Description of Functions and Parameters</th></tr></thead><tbody><tr><td><p>function <strong>createTerm</strong>(</p><p>    uint <em>title</em>, uint <em>version</em></p><p>) external;</p></td><td>Create a clone smart contract using the term’s sequence number <em>title</em> and version number <em>version</em>, and add the address of the cloned instance into the terms mapping.</td></tr><tr><td><p>function <strong>removeTerm</strong>(</p><p>    uint <em>title</em></p><p>) external;</p></td><td>Remove the clone smart contract identified by the term’s sequence number <em>title</em>.</td></tr><tr><td><p>function <strong>addRule</strong>(</p><p>    uint seqOfRule, </p><p>    bytes32 <em>rule</em></p><p>) external;</p></td><td>Add the Rule encoded in bytes32 as <em>rule</em> and identified by the Rule’s sequence number <em>seqOfRule</em> into the rules’ mapping.</td></tr><tr><td><p>function <strong>removeRule</strong>(</p><p>    uint256 <em>seqOfRule</em></p><p>) external;</p></td><td>Remove the rule identified by sequence number <em>seqOfRule</em>.</td></tr><tr><td><p>function <strong>finalizeSHA</strong>(</p><p>) external;</p></td><td>Transfer the special Roles with write authority over the Terms and this Shareholders Agreement to “Zero” to permanently lock their contents.</td></tr></tbody></table>
 
@@ -264,9 +278,9 @@ The external APIs of the **Shareholders Agreement** are primarily used to add, r
 
 To facilitate the drafting and amendment of the **Signature Page** by users, the following lists the editorial API interfaces that may be invoked by external accounts.
 
+
+
 <table><thead><tr><th width="210.74609375">API</th><th>Description of Functions and Parameters</th></tr></thead><tbody><tr><td><p>function <strong>setTiming</strong>(</p><p>    bool <em>initPage</em>,</p><p>    uint <em>signingDays</em>,</p><p>    uint <em>closingDays</em></p><p>) external;</p></td><td>Set the timing parameters for <em>signingDays</em> and <em>closingDays</em> on the initial page when <em>initPage</em> is true, or on the second page when <em>initPage</em> is false. This function shall be invoked by the attorney responsible for drafting the relevant contract.</td></tr><tr><td><p>function <strong>addBlank</strong>(</p><p>    bool <em>initPage</em>, </p><p>    bool <em>beBuyer</em>,</p><p>    uint256 <em>seqOfDeal</em>,</p><p>    uint256 <em>acct</em></p><p>) external;</p></td><td>Add a new blank on the initial page when <em>initPage</em> is true, or on the second page when <em>initPage</em> is false, for the seller when <em>beBuyer</em> is false or for the buyer when <em>beBuyer</em> is true, in connection with the deal identified by sequence number <em>seqOfDeal</em>, for the intended signer with user number <em>acct</em>. This function may be invoked by the attorney responsible for drafting the relevant contract, or by the relevant Sub Keeper when exercising special shareholders’ rights.</td></tr><tr><td><p>function <strong>removeBlank</strong>(</p><p>    bool <em>initPage</em>,</p><p>    uint256 <em>seqOfDeal</em>,</p><p>    uint256 <em>acct</em></p><p>) external;</p></td><td>Remove the blank from the initial page when <em>initPage</em> is true, or from the second page when <em>initPage</em> is false, in relation to the deal identified by sequence number <em>seqOfDeal</em>, for the intended signer identified by user number <em>acct</em>. This function may be invoked by the attorney responsible for drafting the relevant contract, or by the relevant Sub Keeper when exercising special shareholders’ rights.</td></tr></tbody></table>
-
-
 
 
 
