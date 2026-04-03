@@ -171,17 +171,28 @@ Currently the rules include following types: **General Governance Rules, Voting 
   \
   The **Voting Rules** set out the exercise periods for special shareholder rights in various decision-making procedures, and the methods for calculating voting outcomes. Specifically, Rules No.1 through No.7 prescribe the voting rules applicable to capital increase, transfers of equity to third parties, transfers of equity among existing shareholders, and the four hybrid transaction types formed by combinations of these three basic equity transactions. Rule No.8 establishes a special voting regime for amendments to **Shareholders Agreement**. Rules No.9 and No.10 govern the voting procedures for ordinary and special resolutions of the General Meeting, respectively, while Rules No.11 and No.12 govern the voting procedures for ordinary and special resolutions of the Board of Directors, respectively.\
   \
-  Where special requirements arise, additional customized **Voting Rules** may be freely introduced after Rule No.12, up to a maximum of Rule No.255. Once such rules are incorporated into the **Shareholders Agreement**, they may be mandatorily applied during the proposal and voting processes by reference to their corresponding rule sequence number. Any adoption or modification of voting rules constitutes an amendment to the **Shareholders Agreement** and, accordingly, must be approved by the **General Meeting** in accordance with Rule No.8 for the revised **Shareholders Agreement** to become effective.<br>
+  Where special requirements arise, additional customized **Voting Rules** may be freely introduced after Rule No.12, up to a maximum of Rule No.255. Once such rules are incorporated into the **Shareholders Agreement**, they may be mandatorily applied during the proposal and voting processes by reference to their corresponding rule sequence number. Any adoption or modification of voting rules constitutes an amendment to the **Shareholders Agreement** and, accordingly, must be approved by the **General Meeting** in accordance with Rule No.8 for the revised **Shareholders Agreement** to become effective.
+
+
+
 * **(3) Position Allocate Rule (No. 256 \~ 511)**\
   \
-  The **Position Allocation Rules** specify the allocation of nomination rights for directors and officers, the **Voting Rule** applicable, and the terms thereof. By defining directors’ nomination rights under this rule, the allocation of **Board** seats among shareholders may be achieved. Nomination rights may be vested in a specific user or in a designated title of positions (e.g. CEO may nominate CFO). If, under the **Voting Rule** applicable, both the voting points ratio and the headcount ratio are set to zero, this indicates that the nominator may directly appoint the candidate to the position without approval.<br>
+  The **Position Allocation Rules** specify the allocation of nomination rights for directors and officers, the **Voting Rule** applicable, and the terms thereof. By defining directors’ nomination rights under this rule, the allocation of **Board** seats among shareholders may be achieved. Nomination rights may be vested in a specific user or in a designated title of positions (e.g. CEO may nominate CFO). If, under the **Voting Rule** applicable, both the voting points ratio and the headcount ratio are set to zero, this indicates that the nominator may directly appoint the candidate to the position without approval.
+
+
+
 *   **(4) First Refusal Rule (No. 512 \~ 767)**<br>
 
-    The **First Refusal Rules** govern shareholders’ pre-emptive rights to subscribe for newly issued equity or rights of first refusal to purchase equity proposed to be transferred. Such rights may be granted equally to all shareholders or conferred upon specific ones. The allocation of the subject equity may be made pro rata based on voting rights or in accordance with the chronological order in which such rights are exercised. Up to 256 distinct first-refusal rules may be established to apply to different transaction types and different combinations of entitled parties.\
-    <br>
+    The **First Refusal Rules** govern shareholders’ pre-emptive rights to subscribe for newly issued equity or rights of first refusal to purchase equity proposed to be transferred. Such rights may be granted equally to all shareholders or conferred upon specific ones. The allocation of the subject equity may be made pro rata based on voting rights or in accordance with the chronological order in which such rights are exercised. Up to 256 distinct first-refusal rules may be established to apply to different transaction types and different combinations of entitled parties.
+
+<br>
+
 *   **(5) Group Update Order (No. 768 \~ 1023)**<br>
 
-    **Group Update Orders** are used to define and update groups of affiliated shareholders (or persons acting in concert). Each group is identified by a representative shareholder’s user number. During the activation process of a **Shareholders Agreement**, the system automatically executes the **Group Update Orders** contained therein to add specified users into, or remove them from, a particular affiliation group. A proposal for updating **Shareholders Agreement** with **Group Update Orders** effectively constitutes a declaration and disclosure by the relevant shareholders of their affiliated relationships. Accordingly, the review and approval of such motion signifies the General Meeting’s acknowledgment and approval of such relationships.<br>
+    **Group Update Orders** are used to define and update groups of affiliated shareholders (or persons acting in concert). Each group is identified by a representative shareholder’s user number. During the activation process of a **Shareholders Agreement**, the system automatically executes the **Group Update Orders** contained therein to add specified users into, or remove them from, a particular affiliation group. A proposal for updating **Shareholders Agreement** with **Group Update Orders** effectively constitutes a declaration and disclosure by the relevant shareholders of their affiliated relationships. Accordingly, the review and approval of such motion signifies the General Meeting’s acknowledgment and approval of such relationships.
+
+<br>
+
 *   **(6) Listing Rule (No. 1024 \~ 1280)**
 
     \
@@ -201,30 +212,45 @@ Currently the terms include the following types: **Anti Dilution, Lock Up, Drag 
 
     **Anti-Dilution** is a special smart contract designed to protect existing shareholders from dilution caused by the issuance of new shares at a lower price, which would otherwise dilute the effective per-unit acquisition price of their shares (calculated as acquisition cost divided by aggregate par value). The mechanism establishes benchmark prices for different classes of shares and specifies the shareholders’ user number of the parties responsible for providing anti-dilution compensation (typically the company’s controlling shareholder). If new shares are issued at a price below the applicable benchmark price, the obligated party must compensate the entitled shareholders through a gratuitous transfer of equity, until the weighted-average acquisition price of the entitled shareholders is adjusted to align with the new issuance price.<br>
 
-    To facilitate the drafting and amendment of the **Anti Dilution** by users, the following lists the editorial API interfaces that may be invoked by external accounts.<br>
+    To facilitate the drafting and amendment of the **Anti Dilution** by users, the following lists the editorial API interfaces that may be invoked by external accounts.
+
+
+
 *   **(2) Lock Up (No.2 Term)**<br>
 
     **Lock Up** is a specialized smart contract designed to define and monitor shares subject to transfer restrictions. For each locked shares, the contract assigns a dedicated “locker” that records the lock-up expiration date and the user numbers of the designated “key holders” whose consent is required for any early release. The subject share may be transferred prior to the expiration of the lock-up period only with the unanimous consent of all key holders; otherwise, the system will automatically reject the proposed transfer. If the lock-up expiration date is set to zero, the share shall remain permanently locked and non-transferable unless all key holders unanimously approve its release.<br>
 
-    To facilitate the drafting and amendment of the Lock Up by users, the following lists the editorial API interfaces that may be invoked by external accounts.<br>
+    To facilitate the drafting and amendment of the Lock Up by users, the following lists the editorial API interfaces that may be invoked by external accounts.
+
+
+
 *   **(3) Drag/Tag Along (No.3 \~ No.4 Term)**<br>
 
     **Drag/Tag Along** is a specialized smart contract designed to define and execute coordinated share transfer arrangements. Under a **Drag Along**, when a selling shareholder intends to transfer shares, it may require specified obligors to sell their shares alongside, enabling the buyer to acquire a larger proportion of the company’s equity. Under a **Tag Along**, designated right holders may require the seller to allow them to sell their shares on the same price and terms, thereby facilitating a joint exit.<br>
 
     The contract uses a **Link Rule**, encoded in bytes32, to define the exercise start date, exercise period, minimum **Drag Along** price, or minimum annualized ROE, along with other exercise conditions and timelines. It uses the selling shareholder’s user number to identify the data object Link which is further consists of the Link Rule and the followers (i.e. the **Drag Along** obligors or **Tag Along** right-holders participating in the transfer). Exercise conditions may include a change of company control or may be unconditional, depending on the terms.<br>
 
-    To facilitate the drafting and amendment of the **Drag/Tag Along** by users, the following lists the editorial API interfaces that may be invoked by external accounts.<br>
+    To facilitate the drafting and amendment of the **Drag/Tag Along** by users, the following lists the editorial API interfaces that may be invoked by external accounts.
+
+
+
 * **(4) Put/Call Option**\
   \
   **Put/Call Option** is a specialized smart contract designed to define and enforce the compulsory purchase or sale of a specified quantity and class of shares at a predetermined price. By flexibly configuring the exercise conditions, it can be used to implement complex equity investment arrangements, such as valuation adjustments and mandatory buybacks.\
   \
-  To facilitate the drafting and amendment of the Put/Call Option by users, the following lists the editorial API interfaces that may be invoked by external accounts.<br>
+  To facilitate the drafting and amendment of the Put/Call Option by users, the following lists the editorial API interfaces that may be invoked by external accounts.
+
+
 
 3. **Editorial APIs of Shareholders Agreement**
 
 Therefore, **Shareholders Agreement** can be deemed as a data base comprises of “rules mapping” and “terms mapping”, which is to dynamically define the parameters and attributes of different rules so as to retrieve them in runtime.  As for the functions of **Rules Parser** and **Terms**, they are to set up models for the rules and terms in line with legal logic, and to abstractly define their core attributes and methods, thereafter, expose certain APIs so as for users to dynamically define various attributes or parameters of those rules and terms accordingly.  So that, during runtime, in accordance with user’s commands, specific **Bookkeeper** may search **Shareholders Agreement** as per the predefined logic of specific legal behavior, to get specific attribute or parameter of certain rule, and then, to further determine certain condition or to further control certain process.
 
-The external APIs of the **Shareholders Agreement** are primarily used to add, remove, or query **Terms** and **Rules**. To facilitate the drafting and amendment of the Shareholders Agreement by users, the following lists the editorial API interfaces related to contract drafting and inquiry that may be invoked by external accounts.<br>
+The external APIs of the **Shareholders Agreement** are primarily used to add, remove, or query **Terms** and **Rules**. To facilitate the drafting and amendment of the Shareholders Agreement by users, the following lists the editorial API interfaces related to contract drafting and inquiry that may be invoked by external accounts.
+
+<table><thead><tr><th width="220.86328125">API</th><th>Description of Functions and Parameters</th></tr></thead><tbody><tr><td><p>function <strong>createTerm</strong>(</p><p>    uint <em>title</em>, uint <em>version</em></p><p>) external;</p></td><td>Create a clone smart contract using the term’s sequence number <em>title</em> and version number <em>version</em>, and add the address of the cloned instance into the terms mapping.</td></tr><tr><td><p>function <strong>removeTerm</strong>(</p><p>    uint <em>title</em></p><p>) external;</p></td><td>Remove the clone smart contract identified by the term’s sequence number <em>title</em>.</td></tr><tr><td><p>function <strong>addRule</strong>(</p><p>    uint seqOfRule, </p><p>    bytes32 <em>rule</em></p><p>) external;</p></td><td>Add the Rule encoded in bytes32 as <em>rule</em> and identified by the Rule’s sequence number <em>seqOfRule</em> into the rules’ mapping.</td></tr><tr><td><p>function <strong>removeRule</strong>(</p><p>    uint256 <em>seqOfRule</em></p><p>) external;</p></td><td>Remove the rule identified by sequence number <em>seqOfRule</em>.</td></tr><tr><td><p>function <strong>finalizeSHA</strong>(</p><p>) external;</p></td><td>Transfer the special Roles with write authority over the Terms and this Shareholders Agreement to “Zero” to permanently lock their contents.</td></tr></tbody></table>
+
+
 
 4. **Signature Page**
 
@@ -233,6 +259,10 @@ The external APIs of the **Shareholders Agreement** are primarily used to add, r
 **Shareholders Agreement** and **Investment Agreement** both inherit **Signature Page** as a special component to define and record information related to the contract execution.
 
 To facilitate the drafting and amendment of the **Signature Page** by users, the following lists the editorial API interfaces that may be invoked by external accounts.
+
+<table><thead><tr><th width="210.74609375">API</th><th>Description of Functions and Parameters</th></tr></thead><tbody><tr><td><p>function <strong>setTiming</strong>(</p><p>    bool <em>initPage</em>,</p><p>    uint <em>signingDays</em>,</p><p>    uint <em>closingDays</em></p><p>) external;</p></td><td>Set the timing parameters for <em>signingDays</em> and <em>closingDays</em> on the initial page when <em>initPage</em> is true, or on the second page when <em>initPage</em> is false. This function shall be invoked by the attorney responsible for drafting the relevant contract.</td></tr><tr><td><p>function <strong>addBlank</strong>(</p><p>    bool <em>initPage</em>, </p><p>    bool <em>beBuyer</em>,</p><p>    uint256 <em>seqOfDeal</em>,</p><p>    uint256 <em>acct</em></p><p>) external;</p></td><td>Add a new blank on the initial page when <em>initPage</em> is true, or on the second page when <em>initPage</em> is false, for the seller when <em>beBuyer</em> is false or for the buyer when <em>beBuyer</em> is true, in connection with the deal identified by sequence number <em>seqOfDeal</em>, for the intended signer with user number <em>acct</em>. This function may be invoked by the attorney responsible for drafting the relevant contract, or by the relevant Sub Keeper when exercising special shareholders’ rights.</td></tr><tr><td><p>function <strong>removeBlank</strong>(</p><p>    bool <em>initPage</em>,</p><p>    uint256 <em>seqOfDeal</em>,</p><p>    uint256 <em>acct</em></p><p>) external;</p></td><td>Remove the blank from the initial page when <em>initPage</em> is true, or from the second page when <em>initPage</em> is false, in relation to the deal identified by sequence number <em>seqOfDeal</em>, for the intended signer identified by user number <em>acct</em>. This function may be invoked by the attorney responsible for drafting the relevant contract, or by the relevant Sub Keeper when exercising special shareholders’ rights.</td></tr></tbody></table>
+
+
 
 
 
@@ -252,6 +282,8 @@ If there are any special arrangements stipulated in **Shareholders Agreement**, 
 
 Inside **Investment Agreement**, the substantive elements of a share transaction (subject equity, buyer, amount, price, closing deadline, etc.) are defined by a type of structured object, called "**Deal**"; while, the procedural elements (such as contract parties, signing deadline, closing deadline, etc.) are defined by a reusable and inheritable smart contract component, called "**Signature Page**".
 
+
+
 1. **Deal**
 
 The object of **Deal** defines all necessary factors to issue new shares or transfer existing shares in **Register of Shares**, which also defines a hash lock in form of bytes32 for parties to arrange off-chain or cross-chain payment for equity consideration.
@@ -260,7 +292,19 @@ The share transactions can be categorized into three basic types: “capital inc
 
 In **ShareholdersAgreement**, different voting rules can be tailored for each of the said 7 categories, so as to satisfy the customized requirements of investors.
 
-2. **Signature Page**
+
+
+2. **Editorial APIs of Investment Agreement**
+
+The external APIs of the **Investment Agreement** are primarily used to add, remove, or query **Deal**. In addition, to accommodate transaction requirements such as lock-up and closing of the subject shares, as well as the exercise of special shareholder rights, **Investment Agreement** reserves some other interfaces that may be automatically invoked by the relevant **Sub Keeper** in the course of executing the foregoing processes, so as to automatically update the status of the relevant variables.
+
+To facilitate the drafting and amendment of the **Investment Agreement** by users, the following lists the editorial API interfaces related to contract drafting that may be invoked by external accounts.
+
+<table><thead><tr><th width="222.60546875">API</th><th>Description of Functions and Parameters</th></tr></thead><tbody><tr><td><p>function <strong>addDeal</strong>(</p><p>    bytes32 <em>sn</em>,</p><p>    uint <em>buyer</em>,</p><p>    uint <em>groupOfBuyer</em>,</p><p>    uint <em>paid</em>,</p><p>    uint <em>par</em>,</p><p>    uint <em>distrWeight</em></p><p>) external;</p></td><td>Create and add a Deal object to the Investment Agreement with the transaction parameters encoded in bytes32 form as <em>snOfDeal</em>, the intended buyer identified by user number <em>buyer</em>, the representative of the buyer’s affiliated group identified by user number <em>groupOfBuyer</em>, the paid value of the transaction as <em>paid</em>, the corresponding par value as <em>par</em>, and the distribution weight for the new class in a capital increase transaction as <em>distrWeight</em>.</td></tr><tr><td><p>function delDeal(</p><p>    uint256 <em>seq</em></p><p>) external;</p></td><td>Remove the Deal identified by sequence number <em>seq</em>.</td></tr><tr><td><p>function finalizeIA(</p><p>) external;</p></td><td>Finalize the Investment Agreement and lock its contents.</td></tr></tbody></table>
+
+
+
+3. **Signature Page**
 
 **Signature page** is an independent, reusable and inheritable component smart contract that defines several key attributes of contract’s execution, including contractual parties, signature fields, signing deadline and closing deadline etc..
 
