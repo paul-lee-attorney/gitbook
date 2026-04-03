@@ -50,7 +50,7 @@ Based on the types of information recorded, **Registers** can be divided into tw
 8. **Register of Pledges ("ROP"):** record all pledges attached to the equity shares with respect to their creditor, debtor, pledgor, pledged amount, guaranteed amount, debt expiration date, guarantee period etc;
 9. **Register of Shares ("ROS")**: record all equity shares issued by the company with respect to their shareholders, class, voting weight, issue date, paid-in deadline / date, par value, paid-in amount, issue price and so on;
 10. **List of Orders ("LOO")**: record all information about listing trade of shares in USDC with respect to the subject shares class, sequence number, investors, limited sell orders, limited buy orders, and deals closed etc.
-11. **Register of Investors** (“**ROI**”): record all information about investors who intend to invest in the Company with respect to their user number, group representative’s user number, registration date, verifier’s user number, approved date, registration state, and hash value of ID documents.
+11. **Register of Investors** ("**ROI**"): record all information about investors who intend to invest in the Company with respect to their user number, group representative’s user number, registration date, verifier’s user number, approved date, registration state, and hash value of ID documents.
 12. **Bank**: the official address of the smart contract deployed by Circle Internet Financial that automatically records users’ USDC balances and transaction records.
 13. **Cashier**: record all USDC payment transactions related to the Company, including details of the payer, payee, purpose of payment, authorization for USDC collection, and other relevant information.
 14. **Register of Redemptions** ("**ROR**"): records all information relating to redemption requests for redeemable fund shares and the execution thereof, including, without limitation, the class number, share sequence number, net asset value (NAV) price, shareholder user number, amount of paid, redemption value in USDC, and the sequence of the relevant request package.
@@ -123,7 +123,7 @@ In order to satisfy the size requirements of EIP170, **ComBoox** defines two typ
 
 **(9) Shareholders Agreement Keeper ("SHA Keeper")**: routes write commands to **Register of Shares** and **Register of Agreements**, and controls the legal behaviors of exercising and accepting special shareholders' rights like Drag-Along, Tag-Along, Anti-Dilution and First Refusal;
 
-**(10) List of Orders Keeper ("LOO Keeper")**: routes write commands to **List of Orders**, **Register of Shares**, and **Register of Members**, and controls legal behaviors of listing and withdrawing initial offers, sell orders, and placing buy orders.
+**(10) List of Orders Keeper ("LOO Keeper")**: routes write commands to **List of Orders**, **Register of Shares**, and **Register of Members**, and controls legal behaviors of listing and withdrawing initial offers, sell orders, and placing buy orders to be settled in USDC.
 
 **(11) Accountant**: routes write commands to Cashier, General Meeting Minutes and/or Borad Meeting Minutes, and controls the legal behaviors of distribution of profits or income, and the transfer of funds;
 
@@ -147,7 +147,7 @@ The detailed terms and rules of **Shareholders Agreement** are abstractly define
 
 For example, when setting voting rules for different types of share transaction, a 30-days' review period and a two-thirds voting threshold can be set for capital increase deals, while, a 15-days' review period and a one-half voting threshold can be set for share transfer deals. Thereafter, during the process when a transaction is submitted to the shareholders’ meeting for reviewing and voting, **Bookkeeper** will calculate and determine the time period and voting results as per the transaction type accordingly.
 
-In the **Shareholders Agreement**, the rules of corporate governance and share transaction can be categorized into "**Rules**" and "**Terms**" according to their respective complexity and governing matters.
+In the **Shareholders Agreement**, the rules of corporate governance and share transaction can be categorized into "**Rules**" and "**Terms**" according to their respective complexity and governing matters.<br>
 
 1. **Rules**
 
@@ -159,15 +159,82 @@ Each rule has its own sequence number, so it’s quite easy to set up a mapping 
 
 Currently the rules include following types: **General Governance Rules, Voting Rules, Position Allocate Rules, First Refusal Rules, Grouping Update Orders,** and **Listing Rules**.
 
+
+
+* **(1) Governance Rule (No. 0)**  \
+  \
+  The **Governance Rule** specifies key corporate governance matters, including the company’s legal form, operating term, the basis for calculating voting rights (whether based on paid-in capital or subscribed capital), quorum requirements for the General Meeting and the Board, proposal thresholds, the maximum number of shareholders or directors, the term of office of the Board, and the minimum shareholding percentage required for shareholder disclosure.
+
+
+
+* **(2) Voting Rule (No. 1 \~ 255)**  \
+  \
+  The **Voting Rules** set out the exercise periods for special shareholder rights in various decision-making procedures, and the methods for calculating voting outcomes. Specifically, Rules No.1 through No.7 prescribe the voting rules applicable to capital increase, transfers of equity to third parties, transfers of equity among existing shareholders, and the four hybrid transaction types formed by combinations of these three basic equity transactions. Rule No.8 establishes a special voting regime for amendments to **Shareholders Agreement**. Rules No.9 and No.10 govern the voting procedures for ordinary and special resolutions of the General Meeting, respectively, while Rules No.11 and No.12 govern the voting procedures for ordinary and special resolutions of the Board of Directors, respectively.\
+  \
+  Where special requirements arise, additional customized **Voting Rules** may be freely introduced after Rule No.12, up to a maximum of Rule No.255. Once such rules are incorporated into the **Shareholders Agreement**, they may be mandatorily applied during the proposal and voting processes by reference to their corresponding rule sequence number. Any adoption or modification of voting rules constitutes an amendment to the **Shareholders Agreement** and, accordingly, must be approved by the **General Meeting** in accordance with Rule No.8 for the revised **Shareholders Agreement** to become effective.<br>
+* **(3) Position Allocate Rule (No. 256 \~ 511)**\
+  \
+  The **Position Allocation Rules** specify the allocation of nomination rights for directors and officers, the **Voting Rule** applicable, and the terms thereof. By defining directors’ nomination rights under this rule, the allocation of **Board** seats among shareholders may be achieved. Nomination rights may be vested in a specific user or in a designated title of positions (e.g. CEO may nominate CFO). If, under the **Voting Rule** applicable, both the voting points ratio and the headcount ratio are set to zero, this indicates that the nominator may directly appoint the candidate to the position without approval.<br>
+*   **(4) First Refusal Rule (No. 512 \~ 767)**<br>
+
+    The **First Refusal Rules** govern shareholders’ pre-emptive rights to subscribe for newly issued equity or rights of first refusal to purchase equity proposed to be transferred. Such rights may be granted equally to all shareholders or conferred upon specific ones. The allocation of the subject equity may be made pro rata based on voting rights or in accordance with the chronological order in which such rights are exercised. Up to 256 distinct first-refusal rules may be established to apply to different transaction types and different combinations of entitled parties.\
+    <br>
+*   **(5) Group Update Order (No. 768 \~ 1023)**<br>
+
+    **Group Update Orders** are used to define and update groups of affiliated shareholders (or persons acting in concert). Each group is identified by a representative shareholder’s user number. During the activation process of a **Shareholders Agreement**, the system automatically executes the **Group Update Orders** contained therein to add specified users into, or remove them from, a particular affiliation group. A proposal for updating **Shareholders Agreement** with **Group Update Orders** effectively constitutes a declaration and disclosure by the relevant shareholders of their affiliated relationships. Accordingly, the review and approval of such motion signifies the General Meeting’s acknowledgment and approval of such relationships.<br>
+*   **(6) Listing Rule (No. 1024 \~ 1280)**
+
+    \
+    The **Listing Rules** set out the rules governing the issuance or trading of shares by listing, including maximum and minimum offering price, minimum trading price, resale lockup days, caps on the number of qualified Investors, the title of Verifiers and issuers, the class of shares to which the rules apply, and the maximum aggregate Par Value of shares that may be issued. Up to 256 Listing Rules may be established to regulate the issuance and trading of different classes of equity.
+
+
+
 2. **Terms**
 
 "**Terms**" are defined in form of independent smart contracts, and are relied on structured data objects and their methods to define specific pre-conditions of rights and intermediate parameters algorithm.
 
 Each term has its own sequence number, so it’s quite easy to set up a mapping from “title number” to the “address of term”.
 
-Currently the terms include the following types: **Anti Dilution, Lock Up, Drag Along, Tag Along, Put Option and Call Option**.
+Currently the terms include the following types: **Anti Dilution, Lock Up, Drag Along, Tag Along, Put Option and Call Option**.<br>
+
+*   **(1) Anti Dilution (No. 1 Term)**<br>
+
+    **Anti-Dilution** is a special smart contract designed to protect existing shareholders from dilution caused by the issuance of new shares at a lower price, which would otherwise dilute the effective per-unit acquisition price of their shares (calculated as acquisition cost divided by aggregate par value). The mechanism establishes benchmark prices for different classes of shares and specifies the shareholders’ user number of the parties responsible for providing anti-dilution compensation (typically the company’s controlling shareholder). If new shares are issued at a price below the applicable benchmark price, the obligated party must compensate the entitled shareholders through a gratuitous transfer of equity, until the weighted-average acquisition price of the entitled shareholders is adjusted to align with the new issuance price.<br>
+
+    To facilitate the drafting and amendment of the **Anti Dilution** by users, the following lists the editorial API interfaces that may be invoked by external accounts.<br>
+*   **(2) Lock Up (No.2 Term)**<br>
+
+    **Lock Up** is a specialized smart contract designed to define and monitor shares subject to transfer restrictions. For each locked shares, the contract assigns a dedicated “locker” that records the lock-up expiration date and the user numbers of the designated “key holders” whose consent is required for any early release. The subject share may be transferred prior to the expiration of the lock-up period only with the unanimous consent of all key holders; otherwise, the system will automatically reject the proposed transfer. If the lock-up expiration date is set to zero, the share shall remain permanently locked and non-transferable unless all key holders unanimously approve its release.<br>
+
+    To facilitate the drafting and amendment of the Lock Up by users, the following lists the editorial API interfaces that may be invoked by external accounts.<br>
+*   **(3) Drag/Tag Along (No.3 \~ No.4 Term)**<br>
+
+    **Drag/Tag Along** is a specialized smart contract designed to define and execute coordinated share transfer arrangements. Under a **Drag Along**, when a selling shareholder intends to transfer shares, it may require specified obligors to sell their shares alongside, enabling the buyer to acquire a larger proportion of the company’s equity. Under a **Tag Along**, designated right holders may require the seller to allow them to sell their shares on the same price and terms, thereby facilitating a joint exit.<br>
+
+    The contract uses a **Link Rule**, encoded in bytes32, to define the exercise start date, exercise period, minimum **Drag Along** price, or minimum annualized ROE, along with other exercise conditions and timelines. It uses the selling shareholder’s user number to identify the data object Link which is further consists of the Link Rule and the followers (i.e. the **Drag Along** obligors or **Tag Along** right-holders participating in the transfer). Exercise conditions may include a change of company control or may be unconditional, depending on the terms.<br>
+
+    To facilitate the drafting and amendment of the **Drag/Tag Along** by users, the following lists the editorial API interfaces that may be invoked by external accounts.<br>
+* **(4) Put/Call Option**\
+  \
+  **Put/Call Option** is a specialized smart contract designed to define and enforce the compulsory purchase or sale of a specified quantity and class of shares at a predetermined price. By flexibly configuring the exercise conditions, it can be used to implement complex equity investment arrangements, such as valuation adjustments and mandatory buybacks.\
+  \
+  To facilitate the drafting and amendment of the Put/Call Option by users, the following lists the editorial API interfaces that may be invoked by external accounts.<br>
+
+3. **Editorial APIs of Shareholders Agreement**
 
 Therefore, **Shareholders Agreement** can be deemed as a data base comprises of “rules mapping” and “terms mapping”, which is to dynamically define the parameters and attributes of different rules so as to retrieve them in runtime.  As for the functions of **Rules Parser** and **Terms**, they are to set up models for the rules and terms in line with legal logic, and to abstractly define their core attributes and methods, thereafter, expose certain APIs so as for users to dynamically define various attributes or parameters of those rules and terms accordingly.  So that, during runtime, in accordance with user’s commands, specific **Bookkeeper** may search **Shareholders Agreement** as per the predefined logic of specific legal behavior, to get specific attribute or parameter of certain rule, and then, to further determine certain condition or to further control certain process.
+
+The external APIs of the **Shareholders Agreement** are primarily used to add, remove, or query **Terms** and **Rules**. To facilitate the drafting and amendment of the Shareholders Agreement by users, the following lists the editorial API interfaces related to contract drafting and inquiry that may be invoked by external accounts.<br>
+
+4. **Signature Page**
+
+**Signature Page** is an independent, reusable and inheritable component smart contract that defines several key attributes of contract’s execution, including contractual parties, signature fields, signing deadline and closing deadline etc..
+
+**Shareholders Agreement** and **Investment Agreement** both inherit **Signature Page** as a special component to define and record information related to the contract execution.
+
+To facilitate the drafting and amendment of the **Signature Page** by users, the following lists the editorial API interfaces that may be invoked by external accounts.
+
+
 
 </details>
 
