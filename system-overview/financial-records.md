@@ -6,17 +6,17 @@ To facilitate automatic bookkeeping of the financial records of these activities
 
 <details>
 
-<summary>9.1. <strong>Exchange Rate</strong></summary>
+<summary><strong>9.1. Exchange Rate</strong></summary>
 
 
 
-1. **USD/CBP**
+1. **CBP/USD**
 
 The system offers **CBP** to the public through the smart contract of **Fuel Tank**, at the **CBP/USD** exchange rate that is determined by the **Owner** of the **Platform**. Currently, the exchange rate is 2,816.15, which can be retrieved in real time by users.
 
 
 
-3. **USDC**
+2. **USDC**
 
 The price of **USDC** is deemed to be always $1.00 per unit.
 
@@ -24,7 +24,7 @@ The price of **USDC** is deemed to be always $1.00 per unit.
 
 <details>
 
-<summary>9.2. <strong>CBP Flow Records</strong></summary>
+<summary><strong>9.2. CBP Flow Records</strong></summary>
 
 As an ERC-20 token, CBP's income and expenditure are booked in the Registration Center, which automatically records the sender, recipient and amount of each transaction. Users can further distinguish the CBP payments with respect to their detailed scenarios and reasons according to the identity of the payer and payee. For example, when the payer is "zero" address, it means the Platform minted coins to the payee.
 
@@ -36,7 +36,7 @@ event Transfer(address indexed from, address indexed to, uint256 indexed value);
 
 <details>
 
-<summary>9.3<strong>. USDC Flow Records</strong></summary>
+<summary><strong>9.3. USDC Flow Records</strong></summary>
 
 ComBoox provides API for equity trading transactions in **USDC,** and, **Cashier** holds, receives, forwards, transfers, or distributes the **USDC** paid in connection with these transactions, and is also responsible for recording all such **USDC** payment activities.
 
