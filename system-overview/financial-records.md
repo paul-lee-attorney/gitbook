@@ -6,7 +6,7 @@ To facilitate automatic bookkeeping of the financial records of these activities
 
 <details>
 
-<summary>9.<strong>1. Exchange Rate</strong></summary>
+<summary>9.1. <strong>Exchange Rate</strong></summary>
 
 
 
@@ -24,7 +24,7 @@ The price of **USDC** is deemed to be always $1.00 per unit.
 
 <details>
 
-<summary>9.<strong>2. CBP Flow Records</strong></summary>
+<summary>9.2. <strong>CBP Flow Records</strong></summary>
 
 As an ERC-20 token, CBP's income and expenditure are booked in the Registration Center, which automatically records the sender, recipient and amount of each transaction. Users can further distinguish the CBP payments with respect to their detailed scenarios and reasons according to the identity of the payer and payee. For example, when the payer is "zero" address, it means the Platform minted coins to the payee.
 
@@ -48,7 +48,10 @@ For **USDC** paid to the company such as paid-in contributions and equity subscr
 
 ```solidity
 //Collect USD Function of Cashier
-function collectUsd(TransferAuth memory auth, bytes32 remark) external anyKeeper {
+function collectUsd(
+    TransferAuth memory auth, 
+    bytes32 remark
+) external anyKeeper {
     _transferWithAuthorization(auth);
     emit ReceiveUsd(auth.from, auth.value, remark);
 }
@@ -64,10 +67,20 @@ The authorized executor needs to call the function of **ExecAction** or **ExecAc
 
 ```solidity
 //Transfer USD Function of Cashier
-function transferUsd(address to, uint amt, bytes32 remark) external anyKeeper {
-    require(balanceOfComp() >= amt, "Cashier.transferUsd: insufficient amt");
+function transferUsd(
+    address to, 
+    uint amt, 
+    bytes32 remark
+) external onlyKeeper {
+    if (balanceOfComp() < amt) {
+        revert Cashier_Overflow(bytes32("Cashier_InsufficientAmt"));
+    }
+        
     emit TransferUsd(to, amt, remark);
-    require(_usd().transfer(to, amt),"Cashier.transferUsd: transfer failed"); 
+
+    if (!_gk.getBank().transfer(to, amt)) {
+        revert Cashier_TransferFailed(bytes32("Cashier_TransferFailed"));
+    }
 }
 ```
 
@@ -91,17 +104,21 @@ function distrProfits(uint amt, uint seqOfDR) external onlyKeeper returns(
     if (balanceOfComp() < amt) {
         revert Cashier_Overflow(bytes32("Cashier_InsufficientAmt"));
     }
+    
     RulesParser.DistrRule memory rule =
         _gk.getSHA().getRule(seqOfDR).DistrRuleParser();
     IRegisterOfMembers _rom = _gk.getROM();
     IRegisterOfShares _ros = _gk.getROS();
     WaterfallsRepo.Drop memory drop;
+    
     if ( rule.typeOfDistr == uint8(RulesParser.TypeOfDistr.ProRata)) {
         (drop, mlist, ) = _rivers.proRataDistr(amt, _rom, _ros, false);
     } else if (rule.typeOfDistr == uint8(RulesParser.TypeOfDistr.IntFront)) {
         (drop, mlist, ) = _rivers.intFrontDistr(amt, _ros, rule);
     } else revert Cashier_WrongState(bytes32("Cashier_WrongTypeOfDistr"));
+    
     emit DistrProfits(amt, seqOfDR, drop.seqOfDistr);
+    
     _distrUsd(mlist, bytes32("DistrProfits"));
 }
 
@@ -126,6 +143,7 @@ function distrIncome(uint amt, uint seqOfDR, uint fundManager) external onlyKeep
     IRegisterOfMembers _rom = _gk.getROM();
     IRegisterOfShares _ros = _gk.getROS();
     WaterfallsRepo.Drop memory drop;
+
     if ( rule.typeOfDistr == uint8(RulesParser.TypeOfDistr.ProRata)) {
         (drop, mlist, slist) = _rivers.proRataDistr(amt, _rom, _ros, true);
     } else if (rule.typeOfDistr == uint8(RulesParser.TypeOfDistr.IntFront)) {
@@ -135,26 +153,40 @@ function distrIncome(uint amt, uint seqOfDR, uint fundManager) external onlyKeep
     } else if (rule.typeOfDistr == uint8(RulesParser.TypeOfDistr.HuddleCarry)) {
         (drop, mlist, slist) = _rivers.hurdleCarryDistr(amt, _ros, rule, fundManager);
     } else revert Cashier_WrongState(bytes32("Cashier_WrongTypeOfDistr"));
+    
     emit DistrIncome(amt, seqOfDR, fundManager, drop.seqOfDistr);
+    
     _distrUsd(mlist, bytes32("DistrIncome"));
 }
 
-function depositUsd(uint amt, uint user, bytes32 remark) external onlyKeeper{
+function depositUsd(
+    uint amt, 
+    uint user, 
+    bytes32 remark
+) external onlyKeeper{
     if (balanceOfComp() < amt) {
         revert Cashier_Overflow(bytes32("Cashier_ShortOfAmt"));
     }
+    
     _depositUsd(user, amt, remark);
 }
 
 // Credit `amt` USD to the internal deposit locker of `payee`.
 // `remark` is an accounting tag for the deposit event.
-function _depositUsd(uint payee, uint amt, bytes32 remark) private {
+function _depositUsd(
+    uint payee, 
+    uint amt, 
+    bytes32 remark
+) private {
     if (payee == 0) {
         revert Cashier_WrongParty(bytes32("Cashier_ZeroPayee"));
     }        
+    
     emit DepositUsd(amt, payee, remark);
+    
     _lockers[payee] += amt;
     _lockers[0] += amt;
+    
 }
 
 ```
@@ -210,9 +242,12 @@ function _transferWithAuthorization(TransferAuth memory auth) private {
 }
 
 function custodyUsd(TransferAuth memory auth, bytes32 remark) external anyKeeper {
+        
         _transferWithAuthorization(auth);
+        
         _coffers[auth.from] += auth.value;
         _coffers[address(0)] += auth.value;
+        
         emit CustodyUsd(auth.from, auth.value, remark);
 }
 </code></pre>
@@ -228,14 +263,20 @@ Upon releasing the margin, the **Release USD** function of **Cashier** will be c
 ```solidity
 //Release USD Function
 function releaseUsd(
-    address from, address to, uint amt, bytes32 remark
+    address from, 
+    address to, 
+    uint amt, 
+    bytes32 remark
 ) external onlyKeeper {
     if(_coffers[from] < amt) {
         revert Cashier_Overflow(bytes32("Cashier_InsufficientAmt"));
     }
+    
     _coffers[from] -= amt;
     _coffers[address(0)] -= amt;
+    
     emit ReleaseUsd(from, to, amt, remark);
+    
     if (!_gk.getBank().transfer(to, amt)) {
         revert Cashier_TransferFailed(bytes32("Cashier_TransferFailed"));
     }
